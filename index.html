@@ -4,74 +4,107 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- linking foundation framework" -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <!-- linking foundation -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+        integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>National Park Finder</title>
 </head>
+<header>
+    <!-- nav bar -->
+    <nav class="top-bar topbar-responsive">
+        <div class="top-bar-title">
+            <a class="nav" href="#"><strong>[App Name]</strong></a>
+        </div>
+        <div class="topbar-responsive-links">
+            <div class="top-bar-right">
+                <ul class="menu simple vertical medium-horizontal">
+                    <li><a class="nav" href="#">home</a></li>
+                    <li><a class="nav" href="#">about</a></li>
+                    <li><a class="nav" href="#">contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end nav -->
+</header>
 
 <body>
-    <h1 class="text-center">Find a National Park to Visit!</h1>
-    <div class="row align-center">
-    <form>
-        <select>
-            <option>Activities:</option>
-            <option value="hiking">Hiking</option>
-        </select>
-        <select>
-            <option>States:</option>
-            <option value="Alabama">Alabama</option>
-            <option value="Alaska">Alaska</option>
-            <option value="Arizona">Arizona</option>
-            <option value="Arkansas">Arkansas</option>
-            <option value="California">California</option>
-            <option value="Colorado">Colorado</option>
-            <option value="Connecticut">Connecticut</option>
-            <option value="Delaware">Delaware</option>
-            <option value="Florida">Florida</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Hawaii">Hawaii</option>
-            <option value="Idaho">Idaho</option>
-            <option value="Illinois">Illinois</option>
-            <option value="Indiana">Indiana</option>
-            <option value="Iowa">Iowa</option>
-            <option value="Kansas">Kansas</option>
-            <option value="Kentucky">Kentucky</option>
-            <option value="Louisiana">Louisiana</option>
-            <option value="Maine">Maine</option>
-            <option value="Maryland">Maryland</option>
-            <option value="Massachusetts">Massachusetts</option>
-            <option value="Michigan">Michigan</option>
-            <option value="Minnesota">Minnesota</option>
-            <option value="Mississippi">Mississippi</option>
-            <option value="Missouri">Missouri</option>
-            <option value="Montana">Montana</option>
-            <option value="Nebraska">Nebraska</option>
-            <option value="Nevada">Nevada</option>
-            <option value="New Hampshire">New Hampshire</option>
-            <option value="New Jersey">New Jersey</option>
-            <option value="New Mexico">New Mexico</option>
-            <option value="New York">New York</option>
-            <option value="North Carolina">North Carolina</option>
-            <option value="North Dakota">North Dakota</option>
-            <option value="Ohio">Ohio</option>
-            <option value="Oklahoma">Oklahoma</option>
-            <option value="Oregon">Oregon</option>
-            <option value="Pennslyvania">Pennsylvania</option>
-            <option value="Rhode Island">Rhode Island</option>
-            <option value="South Carolina">South Carolina</option>
-            <option value="South Dakota">South Dakota</option>
-            <option value="Tennessee">Tennessee</option>
-            <option value="Texas">Texas</option>
-            <option value="Utah">Utah</option>
-            <option value="Vermont">Vermont</option>
-            <option value="Virginia">Virginia</option>
-            <option value="Washington">Washington</option>
-            <option value="West Virginia">West Virginia</option>
-            <option value="Wisconsin">Wisconsin</option>
-            <option value="Wyoming">Wyoming</option>
-        </select>
-    </form>
-    </div>
+    <main>
+        <div class="row menu-container">
+            <h2>Find a National Park to Visit</h2>
+            <!-- State list -->
+            <select class="drop-down-options">
+                <option>States:</option>
+                <option value="Alabama">Alabama</option>
+                <option value="Alaska">Alaska</option>
+                <option value="Arizona">Arizona</option>
+                <option value="Arkansas">Arkansas</option>
+                <option value="California">California</option>
+                <option value="Colorado">Colorado</option>
+                <option value="Connecticut">Connecticut</option>
+                <option value="Delaware">Delaware</option>
+                <option value="Florida">Florida</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Hawaii">Hawaii</option>
+                <option value="Idaho">Idaho</option>
+                <option value="Illinois">Illinois</option>
+                <option value="Indiana">Indiana</option>
+                <option value="Iowa">Iowa</option>
+                <option value="Kansas">Kansas</option>
+                <option value="Kentucky">Kentucky</option>
+                <option value="Louisiana">Louisiana</option>
+                <option value="Maine">Maine</option>
+                <option value="Maryland">Maryland</option>
+                <option value="Massachusetts">Massachusetts</option>
+                <option value="Michigan">Michigan</option>
+                <option value="Minnesota">Minnesota</option>
+                <option value="Mississippi">Mississippi</option>
+                <option value="Missouri">Missouri</option>
+                <option value="Montana">Montana</option>
+                <option value="Nebraska">Nebraska</option>
+                <option value="Nevada">Nevada</option>
+                <option value="New Hampshire">New Hampshire</option>
+                <option value="New Jersey">New Jersey</option>
+                <option value="New Mexico">New Mexico</option>
+                <option value="New York">New York</option>
+                <option value="North Carolina">North Carolina</option>
+                <option value="North Dakota">North Dakota</option>
+                <option value="Ohio">Ohio</option>
+                <option value="Oklahoma">Oklahoma</option>
+                <option value="Oregon">Oregon</option>
+                <option value="Pennslyvania">Pennsylvania</option>
+                <option value="Rhode Island">Rhode Island</option>
+                <option value="South Carolina">South Carolina</option>
+                <option value="South Dakota">South Dakota</option>
+                <option value="Tennessee">Tennessee</option>
+                <option value="Texas">Texas</option>
+                <option value="Utah">Utah</option>
+                <option value="Vermont">Vermont</option>
+                <option value="Virginia">Virginia</option>
+                <option value="Washington">Washington</option>
+                <option value="West Virginia">West Virginia</option>
+                <option value="Wisconsin">Wisconsin</option>
+                <option value="Wyoming">Wyoming</option>
+            </select>
+            <!-- Activity Options -->
+            <select class="drop-down-options">
+                <option>Activities:</option>
+                <option value="biking">Biking</option>
+                <option value="camping">Camping</option>
+                <option value="fishing">Fishing</option>
+                <option value="geocaching">Geocaching</option>
+                <option value="hiking">Hiking</option>
+                <option value="hunting">Hunting</option>
+            </select>
+        </div>
+        <div class="row menu-container">
+            <button class="btn">Search</button>
+        </div>
+    </main>
+    <footer>
+    </footer>
+
 </body>
 
 </html>
