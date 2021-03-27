@@ -17,3 +17,8 @@ main {
 .menu-container {
     text-align: center;
 }
+.about {
+    margin-top: 75%;
+    block-size: 200px;
+    text-align: center;
+}
