@@ -5,19 +5,21 @@ main {
 }
 .nav {
     color: black;
+    font-size: 2.25rem;
 }
-.nav:hover {
-    color:white;
+.top-bar {
+    background-color: lightblue;
 }
-
 .drop-down-options {
     width: 30%;
 }
-
 .menu-container {
     text-align: center;
 }
-.about {
-    margin: 70% 20% 0 20%;
-    text-align: center;
+
+/* Park Containers */
+.park-header {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    justify-content: end;
 }
