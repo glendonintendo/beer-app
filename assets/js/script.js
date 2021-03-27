@@ -86,7 +86,7 @@ let parkCardLinks = function(data) {
         parkLink.appendChild(parkName);
         // add a picture for the park
         let parkImg = document.createElement('img');
-        parkImg.innerHTML = 'src=' + data[i].images[0].url + 'alt=' + data[i].images[0].altText;
+        parkImg.innerHTML = 'src=' + data[i].images[0].url + 'alt=' + [data[i].images[0].altText;
         // append to card
         parkLink.appendChild(parkImg);
         // add a description for the park
