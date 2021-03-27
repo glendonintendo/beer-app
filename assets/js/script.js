@@ -1,5 +1,5 @@
 
-
+let parkResultsEl = document.querySelector('#park-results');
 
 let getWeatherData = function(lat, lon) {
     // format the api url
@@ -35,7 +35,6 @@ let displayWeatherData = function(data) {
     // let element = $('<element>').addClass('current-uv').text('The current UV index is: ' + currentUv);
 
 }
-
 const npsRootUrl = 'https://developer.nps.gov/api/v1/';
 const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
 
@@ -71,4 +70,30 @@ const getParks = function(state, activity) {
     return parkData;
 }
 
-
+let parkCardLinks = function(data) {
+    
+    // loop over the parks that have been filtered
+    for (let i=0; i < data.length; i++) {
+        // create a card for park info
+        let parkLink = document.createElement('div');
+        let parkCode = data[i].parkCode;
+        parkLink.classList = "card flex-row align-center" + parkCode;
+        // create header for park name
+        let parkName = document.createElement('h4');
+        parkName.classList = "park-header";
+        parkName.textContent = data[i].name;
+        // append to card
+        parkLink.appendChild(parkName);
+        // add a picture for the park
+        let parkImg = document.createElement('img');
+        parkImg.innerHTML = 'src=' + data[i].images[0].url + 'alt=' + [data[i].images[0].altText;
+        // append to card
+        parkLink.appendChild(parkImg);
+        // add a description for the park
+        let parkDescription = document.createElement('p');
+        parkDescription.classList = 'park-descripton';
+        parkDescription.textContent = data[i].description;
+        // append to card
+        parkLink.appendChild(parkDescription);
+    }
+}
