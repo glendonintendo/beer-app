@@ -9,26 +9,28 @@ const getParks = function(state, activity) {
     
     let parkUrl = `${npsRootUrl}parks?${endpoint}api_key=${npsApiKey}`;
 
-    fetch(parkUrl)
+    let parkData = fetch(parkUrl)
         .then(response => {
             if (response.ok) {
                 return response.json()
                     .then(data => {
                         let parks = [... data.data];
-                        console.log(parks)
-                        parks.filter(park => {
-                            for (let i = 0; i < park.activities.length; i++) {
-                                console.log(park.activities[i]);
-                                if (park.activities[i].name === "Astronomy") {
-                                    return true;
+                        if (activity) {
+                            parks = parks.filter(park => {
+                                for (let i = 0; i < park.activities.length; i++) {
+                                    if (park.activities[i].name === activity) {
+                                        return true;
+                                    }
                                 }
-                            }
-                            return false;
-                        });
+                                return false;
+                            });
+                        }
                         console.log(parks);
                     });
             }
         })
+    
+    return parkData;
 }
 
-getParks('TX', 'Craft Demonstrations');
+console.log(getParks('TX', 'Camping'));
