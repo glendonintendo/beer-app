@@ -18,7 +18,6 @@ main {
     text-align: center;
 }
 .about {
-    margin-top: 75%;
-    block-size: 200px;
+    margin: 70% 20% 0 20%;
     text-align: center;
 }
