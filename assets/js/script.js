@@ -1,4 +1,5 @@
 
+let parkResultsEl = document.querySelector('#park-results');
 
 let getWeatherData = function(lat, lon) {
     // format the api url
@@ -70,6 +71,7 @@ const getParks = function(state, activity) {
 }
 
 let parkCardLinks = function(data) {
+    
     // loop over the parks that have been filtered
     for (let i=0; i < data.length; i++) {
         // create a card for park info
