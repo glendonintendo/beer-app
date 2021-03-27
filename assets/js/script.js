@@ -1,4 +1,5 @@
 const searchButtonEl = document.getElementById("park-search");
+const parkEl = document.getElementById("park-results");
 
 const npsRootUrl = 'https://developer.nps.gov/api/v1/';
 const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
@@ -9,9 +10,10 @@ const searchButtonHandler = function(event) {
     let state = document.getElementById("state-dropdown").value;
     let activity = document.getElementById("activity-dropdown").value;
 
-    console.log(state, activity)
-
     getParks(state, activity)
+        .then(data => {
+            parkCardLinks(data);
+        });
     // call Kale's function to populate the national parks to the page
 }
 
@@ -109,10 +111,8 @@ const getParks = function(state, activity) {
                     return false;
                 });
             }
-            console.log(parks);
             return parks;
-        });
-        
+        });   
 }
 
 const getParkInfo = function(parkCode) {
@@ -131,7 +131,6 @@ const createParkModal = function(data) {
 searchButtonEl.addEventListener("click", searchButtonHandler);
 
 let parkCardLinks = function(data) {
-    
     // loop over the parks that have been filtered
     for (let i=0; i < data.length; i++) {
         // create a card for park info
@@ -145,8 +144,9 @@ let parkCardLinks = function(data) {
         // append to card
         parkLink.appendChild(parkName);
         // add a picture for the park
-        let parkImg = document.createElement('img');
-        parkImg.innerHTML = 'src=' + data[i].images[0].url + 'alt=' + data[i].images[0].altText;
+        let parkImg = document.createElement('img')
+        parkImg.setAttribute('src', data[i].images[0].url);
+        parkImg.setAttribute('alt', data[i].images[0].altText);
         // append to card
         parkLink.appendChild(parkImg);
         // add a description for the park
@@ -155,5 +155,6 @@ let parkCardLinks = function(data) {
         parkDescription.textContent = data[i].description;
         // append to card
         parkLink.appendChild(parkDescription);
+        parkEl.appendChild(parkLink);
     }
 }
