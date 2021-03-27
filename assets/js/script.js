@@ -1,7 +1,30 @@
+const searchButtonEl = document.getElementById("park-search");
 
+const npsRootUrl = 'https://developer.nps.gov/api/v1/';
+const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
 
+const searchButtonHandler = function(event) {
+    event.preventDefault();
+    
+    let state = document.getElementById("state-dropdown").value;
+    let activity = document.getElementById("activity-dropdown").value;
 
-let getWeatherData = function(lat, lon) {
+    console.log(state, activity)
+
+    getParks(state, activity)
+    // call Kale's function to populate the national parks to the page
+}
+
+const nationalParkHandler = function(event) {
+    let element = event.target;
+    
+    // if event target doesn't have class of national park, return
+
+    let parkCode = event.target.getAttribute("data-park-code");
+    return getParkInfo(parkCode);
+}
+
+const getWeatherData = function(lat, lon) {
     // format the api url
     let weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=459a5e31598a1077257e521e66bb2960"
 
@@ -16,7 +39,7 @@ let getWeatherData = function(lat, lon) {
 };
 
 // function to display all of the weather data on the page
-let displayWeatherData = function(data) {
+const displayWeatherData = function(data) {
 
     // retrieve temperature
     let currentTemp = data.current.temp;
@@ -36,39 +59,49 @@ let displayWeatherData = function(data) {
 
 }
 
-const npsRootUrl = 'https://developer.nps.gov/api/v1/';
-const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
-
 const getParks = function(state, activity) {
     let endpoint = '';
     if (state) {
         endpoint += `stateCode=${state}&`;
     }
     
-    let parkUrl = `${npsRootUrl}parks?${endpoint}api_key=${npsApiKey}`;
+    let parkUrl = `${npsRootUrl}parks?${endpoint}limit=500&api_key=${npsApiKey}`;
 
-    let parkData = fetch(parkUrl)
+    return fetch(parkUrl)
         .then(response => {
             if (response.ok) {
                 return response.json()
-                    .then(data => {
-                        let parks = [... data.data];
-                        if (activity) {
-                            parks = parks.filter(park => {
-                                for (let i = 0; i < park.activities.length; i++) {
-                                    if (park.activities[i].name === activity) {
-                                        return true;
-                                    }
-                                }
-                                return false;
-                            });
-                        }
-                        console.log(parks);
-                    });
             }
-        })
-    
-    return parkData;
+        })            
+        .then(data => {
+            let parks = [... data.data];
+            if (activity) {
+                parks = parks.filter(park => {
+                    for (let i = 0; i < park.activities.length; i++) {
+                        if (park.activities[i].name === activity) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+            console.log(parks);
+            return parks;
+        });
+        
 }
 
+const getParkInfo = function(parkCode) {
+    return fetch(`${npsRootUrl}parks?parkCode=${parkCode}&api_key=${npsApiKey}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+        })
+}
 
+const createParkModal = function(data) {
+
+}
+
+searchButtonEl.addEventListener("click", searchButtonHandler);
