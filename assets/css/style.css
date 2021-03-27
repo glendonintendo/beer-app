@@ -1,0 +1,19 @@
+
+/* nav bar customizing */
+main {
+    margin: 150px 0 0 0;
+}
+.nav {
+    color: black;
+}
+.nav:hover {
+    color:white;
+}
+
+.drop-down-options {
+    width: 30%;
+}
+
+.menu-container {
+    text-align: center;
+}
