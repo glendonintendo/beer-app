@@ -16,21 +16,13 @@
         <div class="top-bar-title">
             <a class="nav" href="#"><strong>[App Name]</strong></a>
         </div>
-        <div class="topbar-responsive-links">
-            <div class="top-bar-right">
-                <ul class="menu simple vertical medium-horizontal">
-                    <li><a class="nav" href="#">home</a></li>
-                    <li><a class="nav" href="#">about</a></li>
-                    <li><a class="nav" href="#">contact</a></li>
-                </ul>
-            </div>
-        </div>
     </nav>
     <!-- end nav -->
 </header>
 
 <body>
     <main>
+        <section id="home">
         <div class="row menu-container">
             <h2>Find a National Park to Visit</h2>
             <!-- State list -->
@@ -90,26 +82,61 @@
             <!-- Activity Options -->
             <select class="drop-down-options" id="activity-dropdown">
                 <option value="" disable selected>Activities:</option>
+                <option value="Arts and Culture">Arts and Culture</option>
+                <option value="Astronomy">Astronomy</option>
+                <option value="Auto and ATV">Auto and ATV</option>
                 <option value="Biking">Biking</option>
+                <option value="Boating">Boating</option>
                 <option value="Camping">Camping</option>
+                <option value="Canyoneering">Canyoneering</option>
+                <option value="Caving">Caving</option>
+                <option value="Climbing">Climbing</option>
+                <option value="Compass and GPS">Compass and GPS</option>
+                <option value="Dog Sledding">Dog Sledding</option>
                 <option value="Fishing">Fishing</option>
-                <option value="Geocaching">Geocaching</option>
+                <option value="Flying">Flying</option>
+                <option value="Food">Food</option>
+                <option value="Golfing">Golfing</option>
+                <option value="Guided Tours">Guided Tours</option>
+                <option value="Hands On">Hands On</option>
                 <option value="Hiking">Hiking</option>
-                <option value="Hunting">Hunting</option>
+                <option value="Horse Trekking">Horse Trekking</option>
+                <option value="Hunting and Gathering">Hunting and Gathering</option>
+                <option value="Ice Skating">Ice Skating</option>
+                <option value="Junior Ranger Program">Junior Ranger Program</option>
+                <option value="Living History">Living History</option>
+                <option value="Museum Exhibits">Museum Exhibits</option>
+                <option value="Paddling">Paddling</option>
+                <option value="Park Film">Park Film</option>
+                <option value="Playground">Playground</option>
+                <option value="SCUBA diving">SCUBA diving</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Skiing">Skiing</option>
+                <option value="Snorkeling">Snorkeling</option>
+                <option value="Snow Play">Snow Play</option>
+                <option value="Snowmobiling">Snowmobiling</option>
+                <option value="Snowshoeing">Snowshoeing</option>
+                <option value="Surfing">Surfing</option>
+                <option value="Swimming">Swimming</option>
+                <option value="Team Sports">Team Sports</option>
+                <option value="Tubing">Tubing</option>
+                <option value="Water Skiing">Water Skiing</option>
+                <option value="Wildlife Watching">Wildlife Watching</option>
+
             </select>
         </div>
         <div class="row menu-container">
-            <button class="btn" id="park-search">Search</button>
+            <button class="btn" id="">Search</button>
         </div>
+        </section>
+
+        <div id="park-results">
+        </div>
+
     </main>
     <footer>
     </footer>
-
-
-    <script src="assets/js/script.js"></script>
-
-
-
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
