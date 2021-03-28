@@ -34,14 +34,13 @@ const getWeatherData = function(lat, lon) {
     // format the api url
     let weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=459a5e31598a1077257e521e66bb2960"
 
-    fetch(weatherApiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                // send to function to create the html
-                displayWeatherData(data);
-            });
-        }
-    });
+    return fetch(weatherApiUrl)
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+        })
+        .then(data => data);
 };
 
 // function to display all of the weather data on the page
@@ -114,12 +113,7 @@ const createModalContent = function(data) {
 
     const lat = selectedPark.latitude;
     const lon = selectedPark.longitude;
-    let parkWeatherEl = getWeatherData(lat, lon)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-        })
+    getWeatherData(lat, lon)
         .then(weatherData => {
             displayWeatherData(weatherData)
         })
