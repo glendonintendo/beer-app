@@ -49,7 +49,7 @@ const displayWeatherData = function(data) {
     for (let i=1; i <= 5; i++) {
         // create a card element for each day
         let weatherCard = document.createElement('div');
-        weatherCard.classList('card weather-forecast day-' + i);
+        weatherCard.classList = 'card weather-forecast day-' + i;
         // create a header for the date
         let cardHeader = document.createElement('h4');
         cardHeader.classList = 'forecast-date';
@@ -139,7 +139,7 @@ const createModalContent = function(data) {
     const lon = selectedPark.longitude;
     getWeatherData(lat, lon)
         .then(weatherData => {
-            displayWeatherData(weatherData)
+            displayWeatherData(weatherData);
         })
 };
 
