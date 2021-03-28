@@ -1,5 +1,4 @@
 const searchButtonEl = document.getElementById("park-search");
-const parkEl = document.getElementById("park-results");
 
 const npsRootUrl = 'https://developer.nps.gov/api/v1/';
 const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
@@ -10,10 +9,9 @@ const searchButtonHandler = function(event) {
     let state = document.getElementById("state-dropdown").value;
     let activity = document.getElementById("activity-dropdown").value;
 
+    console.log(state, activity)
+
     getParks(state, activity)
-        .then(data => {
-            parkCardLinks(data);
-        });
     // call Kale's function to populate the national parks to the page
 }
 
@@ -52,10 +50,6 @@ const displayWeatherData = function(data) {
         cardHeader.classList = 'forecast-date';
         let forecastDate = moment().add(i, 'days').format('MM/DD/YYYY');
         cardHeader.textContent = forecastDate;
-        // add the weather icon
-        let forecastImg = 'https://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png';
-        let forecastIcon = document.createElement('img');
-        forecastIcon.setAttribute('src', forecastImg);
         // create an unordered list to add weather items
         let weatherInfo = document.createElement('ul');
         weatherInfo.classList = 'weather-info';
@@ -80,10 +74,10 @@ const displayWeatherData = function(data) {
 
         // append the list to the card
         weatherCard.appendChild(weatherInfo);
-        // append the card to the modal
-        parkModalEl.appendChild(weatherCard);
+        // append the card to the modalgit
     }
-};
+
+}
 
 const getParks = function(state, activity) {
     let endpoint = '';
@@ -111,8 +105,10 @@ const getParks = function(state, activity) {
                     return false;
                 });
             }
+            console.log(parks);
             return parks;
-        });   
+        });
+        
 }
 
 const getParkInfo = function(parkCode) {
@@ -131,6 +127,7 @@ const createParkModal = function(data) {
 searchButtonEl.addEventListener("click", searchButtonHandler);
 
 let parkCardLinks = function(data) {
+    
     // loop over the parks that have been filtered
     for (let i=0; i < data.length; i++) {
         // create a card for park info
@@ -144,9 +141,8 @@ let parkCardLinks = function(data) {
         // append to card
         parkLink.appendChild(parkName);
         // add a picture for the park
-        let parkImg = document.createElement('img')
-        parkImg.setAttribute('src', data[i].images[0].url);
-        parkImg.setAttribute('alt', data[i].images[0].altText);
+        let parkImg = document.createElement('img');
+        parkImg.innerHTML = 'src=' + data[i].images[0].url + 'alt=' + data[i].images[0].altText;
         // append to card
         parkLink.appendChild(parkImg);
         // add a description for the park
@@ -155,6 +151,5 @@ let parkCardLinks = function(data) {
         parkDescription.textContent = data[i].description;
         // append to card
         parkLink.appendChild(parkDescription);
-        parkEl.appendChild(parkLink);
     }
 }
