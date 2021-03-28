@@ -1,5 +1,8 @@
+$(document).foundation();
+
 const searchButtonEl = document.getElementById("park-search");
 const parkEl = document.getElementById("park-results");
+const parkModalEl = document.getElementById("park-modal");
 
 const npsRootUrl = 'https://developer.nps.gov/api/v1/';
 const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
@@ -20,10 +23,12 @@ const searchButtonHandler = function(event) {
 const nationalParkHandler = function(event) {
     let element = event.target;
     
-    // if event target doesn't have class of national park, return
-
+    if (element.matches(".park-card")) {
+        console.log("HELL YEAH")
+    }
     let parkCode = event.target.getAttribute("data-park-code");
-    return getParkInfo(parkCode);
+    console.log(parkCode);
+    // return getParkInfo(parkCode);
 }
 
 const getWeatherData = function(lat, lon) {
@@ -100,11 +105,9 @@ const getParkInfo = function(parkCode) {
         })
 }
 
-const createParkModal = function(data) {
+const createModalContent = function(data) {
 
 }
-
-searchButtonEl.addEventListener("click", searchButtonHandler);
 
 let parkCardLinks = function(data) {
     // loop over the parks that have been filtered
@@ -112,7 +115,9 @@ let parkCardLinks = function(data) {
         // create a card for park info
         let parkLink = document.createElement('div');
         let parkCode = data[i].parkCode;
-        parkLink.classList = "card flex-row align-center" + parkCode;
+        parkLink.classList = "card flex-row align-center park-card";
+        parkLink.setAttribute("data-open", "park-modal");
+        parkLink.setAttribute("data-park-code", parkCode);
         // create header for park name
         let parkName = document.createElement('h4');
         parkName.classList = "park-header";
@@ -134,3 +139,6 @@ let parkCardLinks = function(data) {
         parkEl.appendChild(parkLink);
     }
 }
+
+searchButtonEl.addEventListener("click", searchButtonHandler);
+parkEl.addEventListener("click", nationalParkHandler)
