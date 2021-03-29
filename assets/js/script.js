@@ -154,17 +154,10 @@ const parkCardLinks = function(data) {
         
         // populate park card with park content
         parkLink.innerHTML = `
-
-            <div class="large-4 medium-4 columns" data-park-code="${parkCode}">
-                <img src="${data[i].images[0].url}" alt="${data[i].images[0].altText}" data-park-code="${parkCode}" />
-            </div>
-            <div class="large-8 medium-8 columns" data-park-code="${parkCode}">
-
-            <div class="large-4 medium-4 columns img-holder">
+            <div class="large-4 medium-4 columns img-holder" data-park-code="${parkCode}">
                 <img class="img" src="${data[i].images[0].url}" alt="${data[i].images[0].altText}" data-park-code="${parkCode}" />
             </div>
-            <div class="large-8 medium-8 columns park-info-holder">
-
+            <div class="large-8 medium-8 columns park-info-holder" data-park-code="${parkCode}">
                 <h4 class="park-header" data-park-code="${parkCode}">${data[i].name}</h4>
                 <p class="park-description" data-park-code="${parkCode}">${data[i].description}</p>
             </div>
