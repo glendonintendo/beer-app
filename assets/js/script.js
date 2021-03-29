@@ -23,6 +23,26 @@ const searchButtonHandler = function(event) {
     getParks(state, activity)
         .then(data => {
             parkCardLinks(data);
+            let parkStorage = {};
+            data.forEach(park => {
+                let parkValue = {
+                    activities: park.activities, 
+                    addresses: park.addresses,
+                    contacts: park.contacts,
+                    description: park.description, 
+                    directionsInfo: park.directionsInfo,
+                    directionsUrl: park.directionsUrl,
+                    fullName: park.fullName,
+                    images: park.images,
+                    name: park.name,
+                    latitude: park.latitude,
+                    longitude: park.longitude,
+                    topics: park.topics,
+                    url: park.url
+                };
+                parkStorage[park.parkCode] = parkValue;
+            })
+            localStorage.setItem("parkStorage", JSON.stringify(parkStorage));
         });
 };
 
@@ -31,8 +51,8 @@ const nationalParkHandler = function(event) {
         
     let parkCode = event.target.getAttribute("data-park-code");
     
-    getParkInfo(parkCode)
-        .then(data => createModalContent(data));
+    let parkInfo = getParkInfo(parkCode);
+    createModalContent(parkInfo);
 };
 
 const getWeatherData = function(lat, lon) {
@@ -52,47 +72,18 @@ const getWeatherData = function(lat, lon) {
 const displayWeatherData = function(data) {
     // loop over next five days
     for (let i=1; i <= 5; i++) {
-        // create a card element for each day
         let weatherCard = document.createElement('div');
         weatherCard.classList = 'card weather-forecast day-' + i;
-        // create a header for the date
-        let cardHeader = document.createElement('h4');
-        cardHeader.classList = 'forecast-date';
-        let forecastDate = moment().add(i, 'days').format('MM/DD/YYYY');
-        cardHeader.textContent = forecastDate;
-        // append to container
-        weatherCard.appendChild(cardHeader);
-        // add the weather icon
-        let forecastImg = 'https://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png';
-        let forecastIcon = document.createElement('img');
-        forecastIcon.setAttribute('src', forecastImg);
-        // append to container
-        weatherCard.appendChild(forecastIcon);
-        // create an unordered list to add weather items
-        let weatherInfo = document.createElement('ul');
-        weatherInfo.classList = 'weather-info';
-        // create a temperature item
-        let forecastTemp = document.createElement('li');
-        forecastTemp.classList = 'forecast-temp';
-        forecastTemp.textContent = 'Temperature: ' + data.daily[i].temp.day + ' \u00B0F';
-        // append to the list
-        weatherInfo.appendChild(forecastTemp);
-        // create a humidity item
-        let forecastHumidity = document.createElement('li');
-        forecastHumidity.classList = 'forecast-humidity';
-        forecastHumidity.textContent = 'Humidity: ' + data.daily[i].humidity + '%';
-        // append to the list
-        weatherInfo.appendChild(forecastHumidity);
-        // create a uv element
-        let forecastUvi = document.createElement('li');
-        forecastUvi.classList = 'forecast-uvi';
-        forecastUvi.textContent = 'UV Index: ' + data.daily[i].uvi;
-        // append to the list
-        weatherInfo.appendChild(forecastUvi);
+        weatherCard.innerHTML = `
+            <h4 class="forecast-date">${moment().add(i, 'days').format('MM/DD/YYYY')}</h4>
+            <img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" />
+            <ul class="weather-info">
+                <li class="forecast-temp">Temperature: ${data.daily[i].temp.day} \u00B0F</li>
+                <li class="forecast-humidity">Humidity: ${data.daily[i].humidity}%</li>
+                <li class="forecast-uvi">UV Index: ${data.daily[i].uvi}</li>
+            </ul>
+        `      
 
-        // append the list to the card
-        weatherCard.appendChild(weatherInfo);
-        // append the card to the modal
         parkModalEl.appendChild(weatherCard);
     }
 }
@@ -128,31 +119,26 @@ const getParks = function(state, activity) {
 };
 
 const getParkInfo = function(parkCode) {
-    return fetch(`${npsRootUrl}parks?parkCode=${parkCode}&api_key=${npsApiKey}`)
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-        });
+    let parksData = JSON.parse(localStorage.getItem("parkStorage"));
+    return parksData[parkCode];
 };
 
-const createModalContent = function(data) {
-    const selectedPark = data.data[0];
+const createModalContent = function(parkData) {
     parkModalEl.innerHTML = `
-        <img src="${selectedPark.images[0].url}" alt="${selectedPark.images[0].altText}" data-park-code="${selectedPark.parkCode}" />
-        <h4 class="park-header" data-park-code="${selectedPark.parkCode}">${selectedPark.name}</h4>
-        <p class="park-description" data-park-code="${selectedPark.parkCode}">${selectedPark.description}</p>
+        <img src="${parkData.images[0].url}" alt="${parkData.images[0].altText}" />
+        <h4 class="park-header">${parkData.name}</h4>
+        <p class="park-description">${parkData.description}</p>
         <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
     `
 
-    const lat = selectedPark.latitude;
-    const lon = selectedPark.longitude;
+    const lat = parkData.latitude;
+    const lon = parkData.longitude;
     getWeatherData(lat, lon)
         .then(weatherData => {
             displayWeatherData(weatherData);
-        })
+        });
 };
 
 const parkCardLinks = function(data) {
