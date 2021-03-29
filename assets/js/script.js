@@ -166,7 +166,7 @@ const parkCardLinks = function(data) {
             <div class="large-4 medium-4 columns">
                 <img src="${data[i].images[0].url}" alt="${data[i].images[0].altText}" data-park-code="${parkCode}" />
             </div>
-            <div class="large-8 medium-8 columns>
+            <div class="large-8 medium-8 columns">
                 <h4 class="park-header" data-park-code="${parkCode}">${data[i].name}</h4>
                 <p class="park-description" data-park-code="${parkCode}">${data[i].description}</p>
             </div>
