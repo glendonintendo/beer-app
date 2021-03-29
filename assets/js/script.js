@@ -71,19 +71,19 @@ const displayWeatherData = function(data) {
         // create a temperature item
         let forecastTemp = document.createElement('li');
         forecastTemp.classList = 'forecast-temp';
-        forecastTemp.textContent = data.daily[i].temp.day + ' \u00B0F';
+        forecastTemp.textContent = 'Temperature: ' + data.daily[i].temp.day + ' \u00B0F';
         // append to the list
         weatherInfo.appendChild(forecastTemp);
         // create a humidity item
         let forecastHumidity = document.createElement('li');
         forecastHumidity.classList = 'forecast-humidity';
-        forecastHumidity.textContent = data.daily[i].humidity + '%';
+        forecastHumidity.textContent = 'Humidity: ' + data.daily[i].humidity + '%';
         // append to the list
         weatherInfo.appendChild(forecastHumidity);
         // create a uv element
         let forecastUvi = document.createElement('li');
         forecastUvi.classList = 'forecast-uvi';
-        forecastUvi.textContent = data.daily[i].uvi;
+        forecastUvi.textContent = 'UV Index: ' + data.daily[i].uvi;
         // append to the list
         weatherInfo.appendChild(forecastUvi);
 
