@@ -89,11 +89,9 @@ const displayWeatherData = function(data) {
 
         // append the list to the card
         weatherCard.appendChild(weatherInfo);
-        // append the card to the modalgit
+        // append the card to the modal
         parkModalEl.appendChild(weatherCard);
-        // comment
     }
-
 }
 
 const getParks = function(state, activity) {

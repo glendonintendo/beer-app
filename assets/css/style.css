@@ -1,15 +1,16 @@
-
 /* nav bar customizing */
 main {
     margin: 25px 0 0 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .nav {
     color: black;
     font-size: 2rem;
 }
-.top-bar {
-    border-bottom: black 1px solid;
+
+.nav:hover {
+    color:white;
 }
 .drop-down-options {
     width: 30%;
@@ -17,15 +18,8 @@ main {
 .menu-container {
     text-align: center;
 }
-.btn {
-    border: 1px solid lightgray;
-    padding: 5px;
-}
 
-/* Park Containers */
-.park-header {
-    font-size: 1.2rem;
-}
-.park-description {
-    font-size: 1rem;
+.about {
+    margin: 70% 20% 0 20%;
+    text-align: center;
 }
