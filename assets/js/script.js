@@ -9,13 +9,16 @@ const npsApiKey = 'AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY';
 
 const searchButtonHandler = function(event) {
     event.preventDefault();
-    
-    clearParkEl();
 
     let state = document.getElementById("state-dropdown").value;
     let activity = document.getElementById("activity-dropdown").value;
 
-    console.log(state, activity)
+    if (!state && !activity) {
+        $('#search-error').foundation('open');
+        return;
+    }
+
+    clearParkEl();
 
     getParks(state, activity)
         .then(data => {
@@ -120,7 +123,6 @@ const getParks = function(state, activity) {
                     return false;
                 });
             }
-            console.log(parks);
             return parks;
         });   
 };
@@ -140,6 +142,9 @@ const createModalContent = function(data) {
         <img src="${selectedPark.images[0].url}" alt="${selectedPark.images[0].altText}" data-park-code="${selectedPark.parkCode}" />
         <h4 class="park-header" data-park-code="${selectedPark.parkCode}">${selectedPark.name}</h4>
         <p class="park-description" data-park-code="${selectedPark.parkCode}">${selectedPark.description}</p>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     `
 
     const lat = selectedPark.latitude;
@@ -163,10 +168,10 @@ const parkCardLinks = function(data) {
         
         // populate park card with park content
         parkLink.innerHTML = `
-            <div class="large-4 medium-4 columns">
+            <div class="large-4 medium-4 columns" data-park-code="${parkCode}">
                 <img src="${data[i].images[0].url}" alt="${data[i].images[0].altText}" data-park-code="${parkCode}" />
             </div>
-            <div class="large-8 medium-8 columns">
+            <div class="large-8 medium-8 columns" data-park-code="${parkCode}">
                 <h4 class="park-header" data-park-code="${parkCode}">${data[i].name}</h4>
                 <p class="park-description" data-park-code="${parkCode}">${data[i].description}</p>
             </div>
