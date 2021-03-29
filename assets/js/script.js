@@ -91,6 +91,7 @@ const displayWeatherData = function(data) {
         weatherCard.appendChild(weatherInfo);
         // append the card to the modalgit
         parkModalEl.appendChild(weatherCard);
+        // comment
     }
 
 }
