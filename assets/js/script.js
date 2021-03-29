@@ -15,6 +15,8 @@ const searchButtonHandler = function(event) {
     let state = document.getElementById("state-dropdown").value;
     let activity = document.getElementById("activity-dropdown").value;
 
+    console.log(state, activity)
+
     getParks(state, activity)
         .then(data => {
             parkCardLinks(data);
@@ -55,10 +57,14 @@ const displayWeatherData = function(data) {
         cardHeader.classList = 'forecast-date';
         let forecastDate = moment().add(i, 'days').format('MM/DD/YYYY');
         cardHeader.textContent = forecastDate;
+        // append to container
+        weatherCard.appendChild(cardHeader);
         // add the weather icon
         let forecastImg = 'https://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png';
         let forecastIcon = document.createElement('img');
         forecastIcon.setAttribute('src', forecastImg);
+        // append to container
+        weatherCard.appendChild(forecastIcon);
         // create an unordered list to add weather items
         let weatherInfo = document.createElement('ul');
         weatherInfo.classList = 'weather-info';
@@ -83,10 +89,10 @@ const displayWeatherData = function(data) {
 
         // append the list to the card
         weatherCard.appendChild(weatherInfo);
-        // append the card to the modal
-        parkModalEl.appendChild(weatherCard);
+        // append the card to the modalgit
     }
-};
+
+}
 
 const getParks = function(state, activity) {
     let endpoint = '';
@@ -114,6 +120,7 @@ const getParks = function(state, activity) {
                     return false;
                 });
             }
+            console.log(parks);
             return parks;
         });   
 };
