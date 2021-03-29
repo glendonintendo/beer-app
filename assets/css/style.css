@@ -1,11 +1,12 @@
-
 /* nav bar customizing */
 main {
     margin: 25px 0 0 0;
 }
+
 .nav {
     color: black;
 }
+
 .nav:hover {
     color:white;
 }
@@ -17,6 +18,7 @@ main {
 .menu-container {
     text-align: center;
 }
+
 .about {
     margin: 70% 20% 0 20%;
     text-align: center;
