@@ -55,10 +55,14 @@ const displayWeatherData = function(data) {
         cardHeader.classList = 'forecast-date';
         let forecastDate = moment().add(i, 'days').format('MM/DD/YYYY');
         cardHeader.textContent = forecastDate;
+        // append to container
+        weatherCard.appendChild(cardHeader);
         // add the weather icon
         let forecastImg = 'https://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png';
         let forecastIcon = document.createElement('img');
         forecastIcon.setAttribute('src', forecastImg);
+        // append to container
+        weatherCard.appendChild(forecastIcon);
         // create an unordered list to add weather items
         let weatherInfo = document.createElement('ul');
         weatherInfo.classList = 'weather-info';
