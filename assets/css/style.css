@@ -48,7 +48,7 @@ main {
     font-size: 1.25rem;
 }
 .img {
-    width:  24rem;
+    width:  25rem;
     height: 22rem;
     object-fit: cover;
 }
@@ -62,8 +62,11 @@ main {
 }
 .park-header {
     font-weight: bold;
-    font-size: 1.75rem;
-    padding-bottom: 10px;
+    font-size: 2rem;
+    padding-bottom: 15px;
+}
+.park-description {
+    font-size: 1.5rem;
 }
 
 /* Small screen */
@@ -76,5 +79,9 @@ main {
     .park-info-holder {
         padding-left: 2%;
     }
-
+}
+@media screen and (min-width: 1196px) {
+    .park-info-holder {
+        padding-left: 2%;
+    }
 }
