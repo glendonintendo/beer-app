@@ -5,6 +5,8 @@
 - [Technologies Used](#technologies-used)
 - [Demo and Usage](#demo-and-usage)
 - [Grading Criteria](#grading-criteria)
+- [TO DO](#to-do)
+- [EXTRA](#extra)
 
 ## Description
 (Keith)
@@ -88,3 +90,19 @@ The [National Park Service API](https://www.nps.gov/subjects/developer/api-docum
 
 ### Collaboration - 10% <!-- omit in toc -->
 - [ ] There are no major disparities in the number of GitHub contributions between group members
+
+
+## TO DO
+-   presentation
+-   styling
+-   readme
+-   alert for no search results found
+## EXTRA
+-   carousel for images in modal
+-   include territories in search options
+-   add topics search option
+-   show sunrise/sunset times in park modal
+-   show things-to-do and activities in park modal
+-   add badge system when park is visited
+-   add pagination so can return more than 100 items on search (can remove state error that way too)
+-   revise search to be more modular (searching multiple states at once)
