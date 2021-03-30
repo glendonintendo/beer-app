@@ -1,34 +1,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- linking foundation -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Foundation Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation-float.min.css"
         integrity="sha512-tuBWy51BW5GZ5BfYddst4eq3d8mcnOk1I5ZHj45P5AUcf9yo5X3KmOJslloaM0ZoSDzS4lcGY91j3L1k5ZVuVg=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Custom Styles Link -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>National Park Finder</title>
 </head>
 <header>
-    <!-- nav bar -->
+    <!-- Nav Bar -->
     <nav class="top-bar topbar-responsive">
         <div class="top-bar-title">
             <h1 class="nav"><strong>[App Name]</strong></h1>
         </div>
     </nav>
-    <!-- end nav -->
+    <!-- End Nav -->
 </header>
 
 <body>
     <main>
+        <!-- Search Container -->
         <section id="home">
         <div class="row menu-container">
             <h2><strong>Find a National Park to Visit</strong></h2>
-            <!-- State list -->
+            <!-- State Options -->
             <select class="drop-down-options" id="state-dropdown">
-                <option value="" disable selected>States:</option>
+                <option value="" disable selected>State (required)</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -82,7 +84,7 @@
             </select>
             <!-- Activity Options -->
             <select class="drop-down-options" id="activity-dropdown">
-                <option value="" disable selected>Activities:</option>
+                <option value="" disable selected>Activity (optional)</option>
                 <option value="Arts and Culture">Arts and Culture</option>
                 <option value="Astronomy">Astronomy</option>
                 <option value="Auto and ATV">Auto and ATV</option>
@@ -130,12 +132,17 @@
             <button class="btn" id="park-search">Search</button>
         </div>
         </section>
+        <!-- End Search Container -->
 
+        <!-- Park Card Div -->
         <div id="park-results"></div>
 
+        <!-- Park Info Modal -->
         <div class="reveal" id="park-modal" data-reveal data-v-offset="0"></div>
+        
+        <!-- Search Error Modal -->
         <div class="reveal" id="search-error" data-reveal data-v-offset="150">
-            <p>Please use at least one of the search parameters to continue.</p>
+            <p>Please select a State (required) and an Activity (optional) and try your search again.</p>
             <button class="close-button" data-close aria-label="Close modal" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -144,6 +151,7 @@
     <footer>
     </footer>
 
+    <!-- CDN Links for jQuery, Foundations, Moment, and custom JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.10/what-input.min.js" integrity="sha512-4snZhaL41OLVJbrysFHLFItNF9pb4zzm/X6ag4srEFALI0Hns+FVZg22G/nofqTGliAyaeWxoTjTZpmbU3enXQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js" integrity="sha512-9cXmvmK1gIDw3Tol6Xg/1SUls/CvBMgedu1aDjT519sQzy7jk+LoezyQqlzClW2LgXww4xEyuqtofg7PtWteLQ==" crossorigin="anonymous"></script>
