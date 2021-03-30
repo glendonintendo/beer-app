@@ -10,10 +10,16 @@ main {
 }
 .btn {
     margin-bottom: 10px;
+    background-color: white;
+    border-color:black;
+    padding: 6px;
+    border-radius: 2px;
+    box-shadow: black 0 0 15px;
 }
 .nav {
-    color: black;
+    color: white;
     font-size: 2rem;
+    text-shadow: black 0 0 15px;
 }
 .top-bar {
     background: url("../redwoods.jpg");
@@ -23,9 +29,13 @@ main {
 }
 .drop-down-options {
     width: 30%;
+    box-shadow: black 0 0 8px;
+    border-color: black;
 }
 .menu-container {
     text-align: center;
+    color: white;
+    text-shadow: black 0 0 15px;
 }
 .weather-forecast {
     text-align: center;
@@ -38,7 +48,7 @@ main {
     font-size: 1.25rem;
 }
 .img {
-    width:  22rem;
+    width:  24rem;
     height: 22rem;
     object-fit: cover;
 }
