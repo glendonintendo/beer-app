@@ -69,18 +69,28 @@ main {
     font-size: 1.5rem;
 }
 
-/* Small screen */
+/* Small screen (less than 639px) */
 @media screen and (max-width: 39.9375em) {
     .park-info-holder {
         text-align: center;
     }
+    .img {
+        width: 100%;
+        object-fit: cover;
+    }
 }
-@media screen and (min-width: 640px) and (max-width: 1195px) {
+
+/* Medium (640px to 1023px) */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
     .park-info-holder {
         padding-left: 2%;
     }
+    .park-description {
+        font-size: 1.25rem;
+    }
 }
-@media screen and (min-width: 1196px) {
+/* Large (1024px) and up */
+@media screen and (min-width: 64em) {
     .park-info-holder {
         padding-left: 2%;
     }
