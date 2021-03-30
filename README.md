@@ -3,7 +3,7 @@
 - [User Story](#user-story)
 - [Acceptance Criteria](#acceptance-criteria)
 - [Technologies Used](#technologies-used)
-- [Demo](#demo)
+- [Demo and Usage](#demo-and-usage)
 - [Grading Criteria](#grading-criteria)
 
 ## Description
@@ -20,17 +20,13 @@ SO THAT I can plan trips to national parks accordingly
 ```
 GIVEN a search engine for national park information
 WHEN I load the application
-THEN I am presented with a dropdown menus for activity type and state so that I may search for park
-WHEN I search using the activity and state criteria
+THEN I am presented with a dropdown menus for activity type and state
+WHEN I search using the activity and/or state criteria
 THEN I am presented with national parks that match my search
 WHEN I click on a national park
-THEN I can view more detailed information about the park including  current weather, 5-day forecast, address, pictures, and activities/events
-
-Stretch Goals:
-WHEN I visit the park's detailed information page
-THEN I am given an option to click a button to mark a park as visited
-WHEN I mark a park as visited
-THEN I can view my visited parks on a profile page
+THEN I can view more detailed information about the park including current weather, 5-day forecast, address, pictures, and activities/events
+WHEN I reload page
+THEN I am presented with national parks that I viewed more information on
 ```
 
 ## Technologies Used
@@ -39,31 +35,31 @@ Foundation CSS Framework:
 National Park Service API:
 Open Weather API:
 
-## Demo
+## Demo and Usage
 
 ## Grading Criteria
 ### Technical Acceptance Criteria - 25% <!-- omit in toc -->
-- [ ] Application uses at least two server-side APIs
-- [ ] Application uses client-side storage to store persistent data
-- [ ] Application doesn't use JS alerts, prompts, or confirms (uses modals instead)
-- [ ] Application uses as CSS framework other than Bootstrap
-- [ ] Application is interative (accepts and responds to user input)
+- [x] Application uses at least two server-side APIs
+- [x] Application uses client-side storage to store persistent data
+- [x] Application doesn't use JS alerts, prompts, or confirms (uses modals instead)
+- [x] Application uses as CSS framework other than Bootstrap
+- [x] Application is interative (accepts and responds to user input)
 
 ### Concept - 10% <!-- omit in toc -->
-- [ ] Application should be a unique and novel idea
+- [x] Application should be a unique and novel idea
 - [ ] Your group should clearly and concisely articulate your project idea
 
 ### Deployment - 20% <!-- omit in toc -->
-- [ ] Application deployed at live URL and loads with no errors
-- [ ] Application GitHub URL submitted
+- [x] Application deployed at live URL and loads with no errors
+- [x] Application GitHub URL submitted
 - [ ] Portfolio at live URL submitted, featuring project
 
 ### Repository Quality <!-- omit in toc -->
-- [ ] Repository has a unique name
-- [ ] Repository follow best practices for file structure and naming conventions
-- [ ] Repository follow best practices for class/id naming conventions, indentation, quality comments, etc.
-- [ ] Repository contains multiple descriptive commit messages
-- [ ] Repository contains a quality README file with description, screenshot, and link to deployed application
+- [x] Repository has a unique name
+- [x] Repository follow best practices for file structure and naming conventions
+- [x] Repository follow best practices for class/id naming conventions, indentation, quality comments, etc.
+- [x] Repository contains multiple descriptive commit messages
+- [x] Repository contains a quality README file with description, screenshot, and link to deployed application
   
 ### Application Quality - 15% <!-- omit in toc -->
 - [ ] Application user experience is intuitive and easy to navigate
