@@ -35,9 +35,9 @@ const searchButtonHandler = function(event) {
     getParks(state, activity)
         .then(data => {
             generateParkCards(data);
-            let parkStorage = {};
+            const parkStorage = {};
             data.forEach(park => {
-                let parkValue = {
+                const parkValue = {
                     activities: park.activities, 
                     addresses: park.addresses,
                     contacts: park.contacts,
@@ -107,7 +107,7 @@ const generateParkCards = function(data) {
     // loop over the parks returned from search
     data.forEach(park => {
         // create a card for park info
-        let parkLink = document.createElement("div");
+        const parkLink = document.createElement("div");
         parkLink.classList = "card row align-center park-card";
         parkLink.setAttribute("data-open", "park-modal");
         parkLink.setAttribute("data-park-code", park.parkCode);
@@ -214,7 +214,7 @@ const getWeatherData = function(lat, lon) {
  */
 const generateWeatherCards = function(data) {
     for (let i = 1; i <= 5; i++) {
-        let weatherCard = document.createElement("div");
+        const weatherCard = document.createElement("div");
         weatherCard.classList = "card weather-forecast day-" + i;
         weatherCard.innerHTML = `
             <h4 class="forecast-date">${moment().add(i, "days").format("MM/DD/YYYY")}</h4>
