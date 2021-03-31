@@ -70,12 +70,12 @@ main {
 }
 .saved-parks {
     text-align: center;
-    margin: 0 400px;
+    margin: 0 150px;
     color: white;
     text-shadow: black 0 0 15px;
 }
 .clicked-parks {
-    margin: 25px 450px;
+    margin: 25px 200px;
     padding: 15px;
 }
 .clicked-parks h4 {
@@ -101,6 +101,9 @@ main {
         width: 100%;
         object-fit: cover;
     }
+    .clicked-parks, .saved-parks {
+        margin: 15px;
+    }
 }
 
 /* Medium (640px to 1023px) */
@@ -111,10 +114,14 @@ main {
     .park-description {
         font-size: 1.25rem;
     }
+    .clicked-parks, .saved-parks {
+        margin: 25px;
+    }
 }
 /* Large (1024px) and up */
 @media screen and (min-width: 64em) {
     .park-info-holder {
         padding-left: 2%;
     }
+
 }
