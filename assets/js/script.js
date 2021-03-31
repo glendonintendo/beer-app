@@ -7,6 +7,7 @@ const parkModalEl = document.getElementById("park-modal");
 
 let savedParksArr = [];
 
+
 // global variables for root urls and api keys of apis
 const npsRootUrl = "https://developer.nps.gov/api/v1/";
 const npsApiKey = "AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY";
@@ -72,38 +73,41 @@ const parkDashboard = function() {
     let savedParkEl = document.createElement('div');
     savedParkEl.classList = 'park-dashboard';
 
-    let savedParksTitle = document.createElement('h3');
+    savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>"
+    /*let savedParksTitle = document.createElement('h3');
     savedParksTitle.classList = 'saved-parks';
     savedParksTitle.textContent = 'Previously Visited Parks';
-    savedParkEl.appendChild(savedParksTitle);
+    savedParkEl.appendChild(savedParksTitle);*/
 
-    for (let i=0; i < savedParks.length; i++) {
-        let savedParkCard = document.createElement('card');
-        savedParkCard.classList = 'dashboard-card';
-        let cardHeader = document.createElement('h4');
-        let savedParkName = savedParks[i].parkInfo.fullName;
-        cardHeader.textContent = savedParkName;
-        savedParkCard.appendChild(cardHeader);
+    if (savedParks) {
+        for (let i=0; i < savedParks.length; i++) {
+            let savedParkCard = document.createElement('div');
+            savedParkCard.classList = 'card row align-center clicked-parks';
+            let cardHeader = document.createElement('h4');
+            let savedParkName = savedParks[i].parkInfo.fullName;
+            cardHeader.textContent = savedParkName;
+            savedParkCard.appendChild(cardHeader);
 
-        let savedParkLat = savedParks[i].parkInfo.latitude;
-        let savedParkLon = savedParks[i].parkInfo.longitude;
-        
-        getWeatherData(savedParkLat, savedParkLon)
-        .then(weatherData => {
-            let savedParkTemp = weatherData.current.temp;
-            let savedParkWeatherIcon = weatherData.current.weather[0].icon
+            let savedParkLat = savedParks[i].parkInfo.latitude;
+            let savedParkLon = savedParks[i].parkInfo.longitude;
             
-            let savedTempEl = document.createElement('ul');
-            savedTempEl.classList = 'saved-park-elements';
-            savedTempEl.innerHTML = `
-                <li class="saved-temp"> Today's Temperature: ${savedParkTemp} </li>
-                <img src="https://openweathermap.org/img/wn/${savedParkWeatherIcon}@2x.png" />
-            `
+            getWeatherData(savedParkLat, savedParkLon)
+            .then(weatherData => {
+                let savedParkTemp = weatherData.current.temp;
+                let savedParkWeatherIcon = weatherData.current.weather[0].icon
+                
+                let savedTempEl = document.createElement('ul');
+                savedTempEl.classList = 'saved-park-elements';
+                savedTempEl.innerHTML = `
+                    <li class="saved-temp"> Today's Temperature: ${savedParkTemp} </li>
+                    <img src="https://openweathermap.org/img/wn/${savedParkWeatherIcon}@2x.png" />
+                `
 
-           savedParkCard.appendChild(savedTempEl); 
-        });
+            savedParkCard.appendChild(savedTempEl); 
+            });
 
-        savedParkEl.appendChild(savedParkCard);
+            savedParkEl.appendChild(savedParkCard);
+        }
     }
 
     parkEl.appendChild(savedParkEl);
@@ -115,7 +119,7 @@ const parkDashboard = function() {
 const clearParkEl = function() {
     parkEl.innerHTML = "";
 };
-parkDashboard();
+
 
 /**
  * helper function for national park service api call
@@ -286,6 +290,7 @@ const generateWeatherCards = function(data) {
 };
 
 searchButtonEl.addEventListener("click", searchButtonHandler);
+parkDashboard();
 
 // const getSun = function(lat, lon) {
 //     fetch("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400")

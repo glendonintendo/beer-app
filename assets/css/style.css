@@ -68,6 +68,29 @@ main {
 .park-description {
     font-size: 1.5rem;
 }
+.saved-parks {
+    text-align: center;
+    margin: 0 400px;
+    color: white;
+    text-shadow: black 0 0 15px;
+}
+.clicked-parks {
+    margin: 25px 450px;
+    padding: 15px;
+}
+.clicked-parks h4 {
+    text-align: center;
+    font-weight: bold;
+}
+.saved-park-elements {
+    list-style: none;
+    text-align: center;
+}
+.saved-park-elements img {
+    background-color: rgb(95, 129, 150);
+    border-radius: 5px;
+    align-items: center;
+}
 
 /* Small screen (less than 639px) */
 @media screen and (max-width: 39.9375em) {
