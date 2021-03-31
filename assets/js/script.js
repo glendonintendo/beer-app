@@ -38,6 +38,10 @@ const searchButtonHandler = function(event) {
     getParks(state, activity)
         .then(data => {
             generateParkCards(data);
+            if (data.length === 0) {
+                $('#park-results').html('<h3 class="saved-parks"><strong>No Results Found<strong></h3>');
+                return;
+            }
             const parkStorage = {};
             data.forEach(park => {
                 const parkValue = {
