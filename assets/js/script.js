@@ -52,12 +52,12 @@ const searchButtonHandler = function(event) {
                     name: park.name,
                     latitude: park.latitude,
                     longitude: park.longitude,
+                    parkCode: park.parkCode,
                     topics: park.topics,
                     url: park.url
                 };
                 parkStorage[park.parkCode] = parkValue;
             })
-            console.log(parkStorage);
             localStorage.setItem("parkStorage", JSON.stringify(parkStorage));
         });
 };
@@ -68,32 +68,33 @@ const saveParks = function(clickedParks) {
 
 const parkDashboard = function() {
     let savedParks = JSON.parse(localStorage.getItem("clickedParks"));
-    console.log(savedParks);
+    
+    if (!savedParks) {
+        return;
+    }
+
     // create elements for the saved parks
     let savedParkEl = document.createElement('div');
     savedParkEl.classList = 'park-dashboard';
 
-    savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>"
+    savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>";
 
-    /*let savedParksTitle = document.createElement('h3');
-    savedParksTitle.classList = 'saved-parks';
-    savedParksTitle.textContent = 'Previously Visited Parks';
-    savedParkEl.appendChild(savedParksTitle);*/
+    for (let i=0; i < savedParks.length; i++) {
+        let savedParkCard = document.createElement('div');
+        savedParkCard.classList = 'card row align-center clicked-parks';
+        savedParkCard.setAttribute("data-park-code", savedParks[i].parkInfo.parkCode);
+        savedParkCard.setAttribute("data-open", "park-modal");
+        savedParkCard.style.backgroundImage = "url(" + savedParks[i].parkInfo.images[0].url + ")";
+        let cardHeader = document.createElement('h4');
+        let savedParkName = savedParks[i].parkInfo.fullName;
+        cardHeader.textContent = savedParkName;
+        cardHeader.setAttribute("data-park-code", savedParks[i].parkInfo.parkCode);
+        savedParkCard.appendChild(cardHeader);
 
-    if (savedParks) {
-        for (let i=0; i < savedParks.length; i++) {
-            let savedParkCard = document.createElement('div');
-            savedParkCard.classList = 'card row align-center clicked-parks';
-            savedParkCard.style.backgroundImage = "url(" + savedParks[i].parkInfo.images[0].url + ")";
-            let cardHeader = document.createElement('h4');
-            let savedParkName = savedParks[i].parkInfo.fullName;
-            cardHeader.textContent = savedParkName;
-            savedParkCard.appendChild(cardHeader);
-
-            let savedParkLat = savedParks[i].parkInfo.latitude;
-            let savedParkLon = savedParks[i].parkInfo.longitude;
-            
-            getWeatherData(savedParkLat, savedParkLon)
+        let savedParkLat = savedParks[i].parkInfo.latitude;
+        let savedParkLon = savedParks[i].parkInfo.longitude;
+        
+        getWeatherData(savedParkLat, savedParkLon)
             .then(weatherData => {
                 let savedParkTemp = weatherData.current.temp;
                 let savedParkWeatherIcon = weatherData.current.weather[0].icon
@@ -101,15 +102,15 @@ const parkDashboard = function() {
                 let savedTempEl = document.createElement('ul');
                 savedTempEl.classList = 'saved-park-elements';
                 savedTempEl.innerHTML = `
-                    <li class="saved-temp"> Today's Temperature: ${savedParkTemp} </li>
-                    <img src="https://openweathermap.org/img/wn/${savedParkWeatherIcon}@2x.png" />
+                    <li class="saved-temp" data-park-code="${savedParks[i].parkInfo.parkCode}"> Today's Temperature: ${savedParkTemp} </li>
+                    <img src="https://openweathermap.org/img/wn/${savedParkWeatherIcon}@2x.png" data-park-code="${savedParks[i].parkInfo.parkCode}"/>
                 `
-
-            savedParkCard.appendChild(savedTempEl); 
+                savedTempEl.setAttribute("data-park-code", savedParks[i].parkInfo.parkCode);
+                savedParkCard.appendChild(savedTempEl);
             });
 
-            savedParkEl.appendChild(savedParkCard);
-        }
+        savedParkCard.addEventListener("click", previouslyVisitedHandler);
+        savedParkEl.appendChild(savedParkCard);
     }
 
     parkEl.appendChild(savedParkEl);
@@ -199,6 +200,8 @@ const generateParkCards = function(data) {
  * 6. call generateWeatherCards to populate weather information to park modal
  */
 const nationalParkHandler = function(event) {
+    event.preventDefault();
+
     clearParkModalEl();
         
     const parkCode = event.target.getAttribute("data-park-code");
@@ -289,6 +292,18 @@ const generateWeatherCards = function(data) {
 
         parkModalEl.appendChild(weatherCard);
     }
+};
+
+const previouslyVisitedHandler = function(event) {
+    event.preventDefault();
+
+    clearParkModalEl();
+
+    const parkCode = event.target.getAttribute("data-park-code");
+    const savedParks = JSON.parse(localStorage.getItem("clickedParks"));
+
+    const clickedParkData = savedParks.filter(park => park.parkInfo.parkCode === parkCode)[0].parkInfo;
+    generateParkModalContent(clickedParkData);
 };
 
 searchButtonEl.addEventListener("click", searchButtonHandler);
