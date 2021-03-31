@@ -10,10 +10,16 @@ main {
 }
 .btn {
     margin-bottom: 10px;
+    background-color: white;
+    border-color:black;
+    padding: 6px;
+    border-radius: 2px;
+    box-shadow: black 0 0 15px;
 }
 .nav {
-    color: black;
+    color: white;
     font-size: 2rem;
+    text-shadow: black 0 0 15px;
 }
 .top-bar {
     background: url("../redwoods.jpg");
@@ -23,9 +29,13 @@ main {
 }
 .drop-down-options {
     width: 30%;
+    box-shadow: black 0 0 8px;
+    border-color: black;
 }
 .menu-container {
     text-align: center;
+    color: white;
+    text-shadow: black 0 0 15px;
 }
 .weather-forecast {
     text-align: center;
@@ -38,7 +48,7 @@ main {
     font-size: 1.25rem;
 }
 .img {
-    width:  22rem;
+    width:  25rem;
     height: 22rem;
     object-fit: cover;
 }
@@ -52,19 +62,36 @@ main {
 }
 .park-header {
     font-weight: bold;
-    font-size: 1.75rem;
-    padding-bottom: 10px;
+    font-size: 2rem;
+    padding-bottom: 15px;
+}
+.park-description {
+    font-size: 1.5rem;
 }
 
-/* Small screen */
+/* Small screen (less than 639px) */
 @media screen and (max-width: 39.9375em) {
     .park-info-holder {
         text-align: center;
     }
+    .img {
+        width: 100%;
+        object-fit: cover;
+    }
 }
-@media screen and (min-width: 640px) and (max-width: 1195px) {
+
+/* Medium (640px to 1023px) */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
     .park-info-holder {
         padding-left: 2%;
     }
-
+    .park-description {
+        font-size: 1.25rem;
+    }
+}
+/* Large (1024px) and up */
+@media screen and (min-width: 64em) {
+    .park-info-holder {
+        padding-left: 2%;
+    }
 }
