@@ -304,6 +304,11 @@ const previouslyVisitedHandler = function(event) {
 
     const clickedParkData = savedParks.filter(park => park.parkInfo.parkCode === parkCode)[0].parkInfo;
     generateParkModalContent(clickedParkData);
+
+    const lat = clickedParkData.latitude;
+    const lon = clickedParkData.longitude;
+    getWeatherData(lat, lon)
+        .then(weatherData => generateWeatherCards(weatherData));
 };
 
 searchButtonEl.addEventListener("click", searchButtonHandler);
