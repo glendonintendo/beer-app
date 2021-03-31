@@ -74,6 +74,7 @@ const parkDashboard = function() {
     savedParkEl.classList = 'park-dashboard';
 
     savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>"
+
     /*let savedParksTitle = document.createElement('h3');
     savedParksTitle.classList = 'saved-parks';
     savedParksTitle.textContent = 'Previously Visited Parks';
@@ -83,6 +84,7 @@ const parkDashboard = function() {
         for (let i=0; i < savedParks.length; i++) {
             let savedParkCard = document.createElement('div');
             savedParkCard.classList = 'card row align-center clicked-parks';
+            savedParkCard.style.backgroundImage = "url(" + savedParks[i].parkInfo.images[0].url + ")";
             let cardHeader = document.createElement('h4');
             let savedParkName = savedParks[i].parkInfo.fullName;
             cardHeader.textContent = savedParkName;
