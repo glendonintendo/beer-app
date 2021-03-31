@@ -5,6 +5,8 @@ const searchButtonEl = document.getElementById("park-search");
 const parkEl = document.getElementById("park-results");
 const parkModalEl = document.getElementById("park-modal");
 
+let savedParksArr = [];
+
 // global variables for root urls and api keys of apis
 const npsRootUrl = "https://developer.nps.gov/api/v1/";
 const npsApiKey = "AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY";
@@ -54,9 +56,58 @@ const searchButtonHandler = function(event) {
                 };
                 parkStorage[park.parkCode] = parkValue;
             })
+            console.log(parkStorage);
             localStorage.setItem("parkStorage", JSON.stringify(parkStorage));
         });
 };
+
+const saveParks = function(clickedParks) {
+    localStorage.setItem('clickedParks', JSON.stringify(clickedParks));
+}
+
+const parkDashboard = function() {
+    let savedParks = JSON.parse(localStorage.getItem("clickedParks"));
+    console.log(savedParks);
+    // create elements for the saved parks
+    let savedParkEl = document.createElement('div');
+    savedParkEl.classList = 'park-dashboard';
+
+    let savedParksTitle = document.createElement('h3');
+    savedParksTitle.classList = 'saved-parks';
+    savedParksTitle.textContent = 'Previously Visited Parks';
+    savedParkEl.appendChild(savedParksTitle);
+
+    for (let i=0; i < savedParks.length; i++) {
+        let savedParkCard = document.createElement('card');
+        savedParkCard.classList = 'dashboard-card';
+        let cardHeader = document.createElement('h4');
+        let savedParkName = savedParks[i].parkInfo.fullName;
+        cardHeader.textContent = savedParkName;
+        savedParkCard.appendChild(cardHeader);
+
+        let savedParkLat = savedParks[i].parkInfo.latitude;
+        let savedParkLon = savedParks[i].parkInfo.longitude;
+        
+        getWeatherData(savedParkLat, savedParkLon)
+        .then(weatherData => {
+            let savedParkTemp = weatherData.current.temp;
+            let savedParkWeatherIcon = weatherData.current.weather[0].icon
+            
+            let savedTempEl = document.createElement('ul');
+            savedTempEl.classList = 'saved-park-elements';
+            savedTempEl.innerHTML = `
+                <li class="saved-temp"> Today's Temperature: ${savedParkTemp} </li>
+                <img src="https://openweathermap.org/img/wn/${savedParkWeatherIcon}@2x.png" />
+            `
+
+           savedParkCard.appendChild(savedTempEl); 
+        });
+
+        savedParkEl.appendChild(savedParkCard);
+    }
+
+    parkEl.appendChild(savedParkEl);
+}
 
 /**
  * helper function to clear parks div content
@@ -64,6 +115,7 @@ const searchButtonHandler = function(event) {
 const clearParkEl = function() {
     parkEl.innerHTML = "";
 };
+parkDashboard();
 
 /**
  * helper function for national park service api call
@@ -148,6 +200,9 @@ const nationalParkHandler = function(event) {
     const parkInfo = getParkInfo(parkCode);
     generateParkModalContent(parkInfo);
     
+    savedParksArr.push({parkInfo});
+    saveParks(savedParksArr);
+  
     const lat = parkInfo.latitude;
     const lon = parkInfo.longitude;
     getWeatherData(lat, lon)
