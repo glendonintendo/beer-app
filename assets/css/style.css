@@ -1,5 +1,5 @@
 body {
-    background: url("../redwoods.jpg");
+    background: url("../images/redwoods.jpg");
     background-size: cover;
     background-position: 80%;
     background-attachment: fixed;
@@ -22,7 +22,7 @@ main {
     text-shadow: black 0 0 15px;
 }
 .top-bar {
-    background: url("../redwoods.jpg");
+    background: url("../images/redwoods.jpg");
     background-size: cover;
     background-position: 80%;
     background-attachment: fixed;
