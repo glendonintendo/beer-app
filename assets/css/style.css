@@ -77,14 +77,19 @@ main {
 .clicked-parks {
     margin: 25px 200px;
     padding: 15px;
+    background-size: cover;
 }
 .clicked-parks h4 {
     text-align: center;
     font-weight: bold;
+    color: white;
 }
 .saved-park-elements {
     list-style: none;
     text-align: center;
+}
+.saved-temp {
+    color: white;
 }
 .saved-park-elements img {
     background-color: rgb(95, 129, 150);
