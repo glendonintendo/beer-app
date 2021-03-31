@@ -9,7 +9,8 @@
 - [EXTRA](#extra)
 
 ## Description
-(Keith)
+National Park Finders.
+This is a terrific application website that can be used by anyone wanting to use the internet to gather weather information about certain times of the day, certain times of the week and even certain times of the month about information that is critical of the weather which plays a vital role in our every day lifestyle's. For example the prediction of snow, rain and even ice-storms, this sort of information would be deem very useful to anyone and even especially when planing events on certain days of the week or even different times of the year. The application is centered on recreational parks and weather predictions and gives information that might be useful to someone wanting to for example schedule an outdoor event. This information can easily be gathered from its sleek and easy to use web interface that allows a user the ability of easy to use drop down search buttons that gives the names of all US states and a list of all sorts of activities that anyone might be interested in. This website can also be used to gather weather information on search topics, such as past historical events and even future predictions and so on. By just clicking on any state or activity from a given list you the user are given the information in real time, so this application in fact would be very useful to anyone who relies on the weather.
 
 ## User Story
 ```
