@@ -177,7 +177,7 @@ const generateParkCards = function(data) {
                 <img class="img" src="${park.images[0].url}" alt="${park.images[0].altText}" data-park-code="${park.parkCode}" />
             </div>
             <div class="large-8 medium-8 columns park-info-holder" data-park-code="${park.parkCode}">
-                <h4 class="park-header" data-park-code="${park.parkCode}">${park.name}</h4>
+                <h4 class="park-header" data-park-code="${park.parkCode}">${park.fullName}</h4>
                 <p class="park-description" data-park-code="${park.parkCode}">${park.description}</p>
             </div>
         `;
@@ -244,7 +244,7 @@ const getParkInfo = function(parkCode) {
 const generateParkModalContent = function(parkData) {
     parkModalEl.innerHTML = `
         <img src="${parkData.images[0].url}" alt="${parkData.images[0].altText}" />
-        <h4 class="park-header">${parkData.name}</h4>
+        <h4 class="park-header">${parkData.fullName}</h4>
         <p class="park-description">${parkData.description}</p>
         <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
