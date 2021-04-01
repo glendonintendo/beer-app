@@ -57,23 +57,23 @@ The [National Park Service API](https://www.nps.gov/subjects/developer/api-docum
 ## Demo and Usage
 Click on the first image to get linked to our demo video! You can also view the video transcript [here](https://docs.google.com/document/d/1XS9q8yyOWKTFK21qmrDNGfIPZDCOTBMY1jPg-9qSgEk/edit?usp=sharing).
 
-The user is pointed toward the search bar. The drop down menus provide the user with options for their national park search.
+The user is pointed toward the search bar. The drop down menus provide the user with options for their national park search.  
 [![National Park Finder landing page](./assets/images/landing-page-demo.png)](https://youtu.be/-uKMij6askM)
 
-A user's search will bring up all national parks that match the input parameters.
+A user's search will bring up all national parks that match the input parameters.  
 ![Successful search of parks with astonomy activities in Alaska](./assets/images/search-demo.png)
 
-Using client-side validation, users are infomred when they made a unfulfillable query.
+Using client-side validation, users are infomred when they made a unfulfillable query.  
 ![Modal popup with instructions on completing inputting an appropriate query](./assets/images/client-validation-demo.png)
 
-Each park in a search is clickable to provide the user with more information, including a five-day weather forecast.
+Each park in a search is clickable to provide the user with more information, including a five-day weather forecast.  
 ![Modal popup with weather and additional information for Denali National Park](./assets/images/park-info-demo.png)
 
-Previously clicked parks are saved in local storage and appear on the landing page upon reloading the application. These previously clicked parks additional show current weather upfront, and are still clickalbe to provide additional information.
+Previously clicked parks are saved in local storage and appear on the landing page upon reloading the application. These previously clicked parks additional show current weather upfront, and are still clickalbe to provide additional information.  
 ![Modal popup with weather and additional information for Denali National Park](./assets/images/previously-searched-demo.png)
 
-The app was built mobile-first and therefor the phone and tablet versions looks crisp and are easily scrollable on either type of device.
-![National park search on phone screen](./assets/images/responsive-phone-demo.png)
+The app was built mobile-first and therefor the phone and tablet versions looks crisp and are easily scrollable on either type of device.  
+![National park search on phone screen](./assets/images/responsive-phone-demo.png)  
 
 ![National park search on tablet screen](./assets/images/responsive-tablet-demo.png)
 
