@@ -4,8 +4,6 @@
 - [Acceptance Criteria](#acceptance-criteria)
 - [Technologies Used](#technologies-used)
 - [Demo and Usage](#demo-and-usage)
-- [Grading Criteria](#grading-criteria)
-- [TO DO](#to-do)
 - [EXTRA](#extra)
 
 ## Description
@@ -46,6 +44,9 @@ JavaScript is the heavy lifter in this project. JavaScript gives the application
 ### jQuery <!-- omit in toc -->
 [jQuery](https://api.jquery.com/), is generally used for it's helpful methods for DOM manipulation. Unfortunately, jQuery is only used as a prequisite for Foundations for this project. Instead of jQuery, native JavaScript is used to reference and make changes to the DOM.
 
+### Moment <!-- omit in toc -->
+[Moment](https://momentjs.com/), is used for creating date/time objects, formatting them, and adding them to weather cards so users can associate the forecast with the correct date.
+
 ### National Park Service API <!-- omit in toc -->
 The [National Park Service API](https://www.nps.gov/subjects/developer/api-documentation.htm) is used to get data about national parks in the United States and it's territories. That data is then used to populate park information, such as images and descriptions of parks, to the application. The location data from this API call is also used to get local weather data on that park from the OpenWeather API.
 
@@ -54,50 +55,29 @@ The [National Park Service API](https://www.nps.gov/subjects/developer/api-docum
 
 
 ## Demo and Usage
+Click on the first image to get linked to our demo video! You can also view the video transcript [here](https://docs.google.com/document/d/1XS9q8yyOWKTFK21qmrDNGfIPZDCOTBMY1jPg-9qSgEk/edit?usp=sharing).
 
-## Grading Criteria
-### Technical Acceptance Criteria - 25% <!-- omit in toc -->
-- [x] Application uses at least two server-side APIs
-- [x] Application uses client-side storage to store persistent data
-- [x] Application doesn't use JS alerts, prompts, or confirms (uses modals instead)
-- [x] Application uses as CSS framework other than Bootstrap
-- [x] Application is interative (accepts and responds to user input)
+The user is pointed toward the search bar. The drop down menus provide the user with options for their national park search.
+[![National Park Finder landing page](./assets/images/landing-page-demo.png)](https://youtu.be/-uKMij6askM)
 
-### Concept - 10% <!-- omit in toc -->
-- [x] Application should be a unique and novel idea
-- [ ] Your group should clearly and concisely articulate your project idea
+A user's search will bring up all national parks that match the input parameters.
+![Successful search of parks with astonomy activities in Alaska](./assets/images/search-demo.png)
 
-### Deployment - 20% <!-- omit in toc -->
-- [x] Application deployed at live URL and loads with no errors
-- [x] Application GitHub URL submitted
-- [ ] Portfolio at live URL submitted, featuring project
+Using client-side validation, users are infomred when they made a unfulfillable query.
+![Modal popup with instructions on completing inputting an appropriate query](./assets/images/client-validation-demo.png)
 
-### Repository Quality <!-- omit in toc -->
-- [x] Repository has a unique name
-- [x] Repository follow best practices for file structure and naming conventions
-- [x] Repository follow best practices for class/id naming conventions, indentation, quality comments, etc.
-- [x] Repository contains multiple descriptive commit messages
-- [x] Repository contains a quality README file with description, screenshot, and link to deployed application
-  
-### Application Quality - 15% <!-- omit in toc -->
-- [ ] Application user experience is intuitive and easy to navigate
-- [ ] Application user interface style is clean and polished
-- [ ] Application is responsive
+Each park in a search is clickable to provide the user with more information, including a five-day weather forecast.
+![Modal popup with weather and additional information for Denali National Park](./assets/images/park-modal-demo.png)
 
-### Presentation - 10% <!-- omit in toc -->
-- [ ] Presentation uses Powerpoint or similar presentation software
-- [ ] Every group member should speak during the presentation
-- [ ] Presentation follows Project Presentation Template
+Previously clicked parks are saved in local storage and appear on the landing page upon reloading the application. These previously clicked parks additional show current weather upfront, and are still clickalbe to provide additional information.
+![Modal popup with weather and additional information for Denali National Park](./assets/images/previously-searched-demo.png)
 
-### Collaboration - 10% <!-- omit in toc -->
-- [ ] There are no major disparities in the number of GitHub contributions between group members
+The app was built mobile-first and therefor the phone and tablet versions looks crisp and are easily scrollable on either type of device.
+![National park search on phone screen](./assets/images/responsive-phone-demo.png)
+
+![National park search on tablet screen](./assets/images/responsive-tablet-demo.png)
 
 
-## TO DO
--   presentation
--   styling
--   readme
--   alert for no search results found
 ## EXTRA
 -   carousel for images in modal
 -   include territories in search options
@@ -107,3 +87,15 @@ The [National Park Service API](https://www.nps.gov/subjects/developer/api-docum
 -   add badge system when park is visited
 -   add pagination so can return more than 100 items on search (can remove state error that way too)
 -   revise search to be more modular (searching multiple states at once)
+-   modal is more interactive (can click weather icon for forecast, can click map for direciton information, etc.)
+-   favicon!
+-   switch moment.js to day.js
+-   on hover styling for park cards
+-   bug/fix clicking park multiple times amkes park show up multiple times in previously searched
+-   Accessibility?
+-   
+-   background image isn't centered on smaller screens
+-   make search parameters bigger on phone
+-   modal at top of the page instead of being created on place where user clicked
+-   feature to send user to previously park page on clicking the header
+-   
