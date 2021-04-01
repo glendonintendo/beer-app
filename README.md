@@ -93,9 +93,7 @@ The app was built mobile-first and therefor the phone and tablet versions looks 
 -   on hover styling for park cards
 -   bug/fix clicking park multiple times amkes park show up multiple times in previously searched
 -   Accessibility?
--   
 -   background image isn't centered on smaller screens
 -   make search parameters bigger on phone
 -   modal at top of the page instead of being created on place where user clicked
 -   feature to send user to previously park page on clicking the header
--   
