@@ -67,7 +67,7 @@ Using client-side validation, users are infomred when they made a unfulfillable 
 ![Modal popup with instructions on completing inputting an appropriate query](./assets/images/client-validation-demo.png)
 
 Each park in a search is clickable to provide the user with more information, including a five-day weather forecast.
-![Modal popup with weather and additional information for Denali National Park](./assets/images/park-modal-demo.png)
+![Modal popup with weather and additional information for Denali National Park](./assets/images/park-info-demo.png)
 
 Previously clicked parks are saved in local storage and appear on the landing page upon reloading the application. These previously clicked parks additional show current weather upfront, and are still clickalbe to provide additional information.
 ![Modal popup with weather and additional information for Denali National Park](./assets/images/previously-searched-demo.png)
