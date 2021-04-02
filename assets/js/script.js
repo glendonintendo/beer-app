@@ -5,14 +5,14 @@ const searchButtonEl = document.getElementById("park-search");
 const parkEl = document.getElementById("park-results");
 const parkModalEl = document.getElementById("park-modal");
 
-// parks previously clicked on and saved to localStorage
-const savedParks = JSON.parse(localStorage.getItem("savedParks")) || {};
-
 // global variables for root urls and api keys of apis
 const npsRootUrl = "https://developer.nps.gov/api/v1/";
 const npsApiKey = "AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY";
 const weatherRootUrl = "https://api.openweathermap.org/data/2.5/";
 const weatherApiKey = "d3a330e6929f9f784d6290a5c6be1892";
+
+// parks previously clicked on and saved to localStorage
+const savedParks = JSON.parse(localStorage.getItem("savedParks")) || {};
 
 /**
  * handler function for search button on click
@@ -28,12 +28,13 @@ const searchButtonHandler = function(event) {
 
     const state = document.getElementById("state-dropdown").value;
     const activity = document.getElementById("activity-dropdown").value;
+    const topic = document.getElementById("topic-dropdown").value;
     if (!state) {
         $("#search-error").foundation("open");
         return;
     }
 
-    getParks(state, activity)
+    getParks(state, activity, topic)
         .then(data => {
             if (data.length === 0) {
                 $('#no-results-error').foundation("open");
@@ -75,7 +76,7 @@ const searchButtonHandler = function(event) {
  * @param {string} activity input activity from activity dropdown menu
  * @return {object} parks array from national parks service api call
  */
- const getParks = function(state, activity) {
+ const getParks = function(state, activity, topic) {
     let stateCodeQuery = "";
     if (state) {
         stateCodeQuery += `stateCode=${state}&`;
@@ -91,10 +92,17 @@ const searchButtonHandler = function(event) {
         })            
         .then(data => {
             let parks = [... data.data];
-            // filter parks by if activity is available at park, if user entered activity in search
+            
+            // filter parks by activity, if user entered activity in search
             if (activity) {
                 parks = parks.filter(park => park.activities.some(activityObj => activityObj.name === activity));
             }
+
+            // filter parks by topic, if user entered topic in search
+            if (topic) {
+                parks = parks.filter(park => park.topics.some(topicObj => topicObj.name === topic));
+            }
+
             return parks;
         });   
 };
@@ -256,13 +264,3 @@ const savedParksDashBoardHandler = function(savedParks) {
 
 searchButtonEl.addEventListener("click", searchButtonHandler);
 window.addEventListener("load", savedParksDashBoardHandler(savedParks));
-
-// const getSun = function(lat, lon) {
-//     fetch("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400")
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json();
-//             }
-//         })
-//         .then(data => console.log(data));
-// };
