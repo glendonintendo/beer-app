@@ -5,13 +5,14 @@ const searchButtonEl = document.getElementById("park-search");
 const parkEl = document.getElementById("park-results");
 const parkModalEl = document.getElementById("park-modal");
 
+// parks previously clicked on and saved to localStorage
 const savedParks = JSON.parse(localStorage.getItem("savedParks")) || {};
 
 // global variables for root urls and api keys of apis
 const npsRootUrl = "https://developer.nps.gov/api/v1/";
 const npsApiKey = "AvrC614SiERYcGihHMcufgAu8yxa1IhxRJGCthwY";
 const weatherRootUrl = "https://api.openweathermap.org/data/2.5/";
-const weatherApiKey = "459a5e31598a1077257e521e66bb2960";
+const weatherApiKey = "d3a330e6929f9f784d6290a5c6be1892";
 
 /**
  * handler function for search button on click
@@ -38,7 +39,7 @@ const searchButtonHandler = function(event) {
                 $('#no-results-error').foundation("open");
                 return;
             }
-            clearParkEl();
+            parkEl.innerHTML = "";
             const parkStorage = {};
             data.forEach(park => {
                 const parkValue = {
@@ -64,35 +65,15 @@ const searchButtonHandler = function(event) {
         });
 };
 
-const parkDashboard = function() {
-    if (Object.keys(savedParks).length === 0) {
-        return;
-    }
-
-    // create elements for the saved parks
-    const savedParkEl = document.createElement('div');
-    savedParkEl.classList = 'park-dashboard';
-    savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>";
-    parkEl.appendChild(savedParkEl);
-
-    generateParkCards(savedParks);
-}
-
-/**
- * helper function to clear parks div content
- */
-const clearParkEl = function() {
-    parkEl.innerHTML = "";
-};
-
-
 /**
  * helper function for national park service api call
- * 1. receive state and activity from user input in search
- * 2. create api endpoint from state input
- * 3. fetch api call using created url
- * 4. filter parks by activity input
- * 5. return array of filtered parks
+ * 1. create api endpoint from state input
+ * 2. fetch api call using created url
+ * 3. filter parks by activity input
+ * 
+ * @param {string} state input state from state dropdown menu
+ * @param {string} activity input activity from activity dropdown menu
+ * @return {object} parks array from national parks service api call
  */
  const getParks = function(state, activity) {
     let stateCodeQuery = "";
@@ -120,9 +101,9 @@ const clearParkEl = function() {
 
 /**
  * helper function to create park cards and append park cards to parks div
- * 1. receive parks array
- * 2. create park card for each park in parks array
- * 3. append park cards to parks div
+ * 
+ * @param {object} parks object of saved parks
+ * @return {undefined}
  */
 const generateParkCards = function(parks) {
     // create a card for park info
@@ -153,21 +134,23 @@ const generateParkCards = function(parks) {
 
 /**
  * handler function for national park card on click
- * 1. call clearParkModalEl to clear contents of park modal
+ * 1. clear parkModalEl of content
  * 2. get park code from card stored in data-park-code attribute
- * 3. call getParkInfo retrieve park information from localStorage
- * 4. call generateParkModalContent to populate park information to park modal and unhide modal
+ * 3. get park data from saved parks or getParkInfo call if park not in saved parks
+ * 4. set park data to savedParks and add savedParks to localStorage
  * 5. call getWeatherData passing in latitude and longitude from parkInfo to get weather data
  * 6. call generateWeatherCards to populate weather information to park modal
+ * 
+ * @param {object} event event object created from park card onclick
+ * @return {undefined}
  */
 const nationalParkHandler = function(event) {
     event.preventDefault();
 
-    clearParkModalEl();
+    parkModalEl.innerHTML = "";
         
     const parkCode = event.target.getAttribute("data-park-code");
-    
-    const parkInfo = getParkInfo(parkCode);
+    const parkInfo = savedParks[parkCode] || getParkInfo(parkCode);
     generateParkModalContent(parkInfo);
     
     savedParks[parkCode] = parkInfo;
@@ -180,17 +163,10 @@ const nationalParkHandler = function(event) {
 };
 
 /**
- * helper function to clear park modal content
- */
-const clearParkModalEl = function() {
-    parkModalEl.innerHTML = "";
-};
-
-/**
  * helper function to get information about parks stored in LocalStorage
- * 1. receive parkCode
- * 2. parse parkStorage object in localStorage
- * 3. return park object with key of parkCode from parkStorage object
+ * 
+ * @param {string} parkCode unique park indentifier
+ * @return {object} park data object
  */
 const getParkInfo = function(parkCode) {
     const parksData = JSON.parse(localStorage.getItem("parkStorage"));
@@ -198,9 +174,10 @@ const getParkInfo = function(parkCode) {
 };
 
 /**
- * helper function to append park information to park modal
- * 1. receive parkData
- * 2. change park modal innerHTML to include park data
+ * helper function to create park information for park modal
+ * 
+ * @param {object} parkData park data object
+ * @return {undefined}
  */
 const generateParkModalContent = function(parkData) {
     parkModalEl.innerHTML = `
@@ -210,15 +187,17 @@ const generateParkModalContent = function(parkData) {
         <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
-    `
+    `;
 };
 
 /**
  * helper function for open weather api call
- * 1. receive latitude and longitude
- * 2. create api endpoint from latitude and longitude
- * 3. fetch api call using created url
- * 4. return weather data object
+ * 1. create api endpoint from latitude and longitude
+ * 2. fetch api call using created url
+ * 
+ * @param {number} lat latitude of location
+ * @param {number} lon longitude of location
+ * @return {object} weather data object
  */
 const getWeatherData = function(lat, lon) {
     const weatherApiUrl = `${weatherRootUrl}onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
@@ -233,9 +212,9 @@ const getWeatherData = function(lat, lon) {
 
 /**
  * helper function to create weather cards and append weather cards to park modal
- * 1. receive weather data object
- * 2. create weather card for each day of 5-day forecast from weather data object
- * 3. append weather cards to parkModal
+ * 
+ * @param {object} data weather data
+ * @return {undefined}
  */
 const generateWeatherCards = function(data) {
     for (let i = 1; i <= 5; i++) {
@@ -255,24 +234,28 @@ const generateWeatherCards = function(data) {
     }
 };
 
-const previouslyVisitedHandler = function(event) {
-    event.preventDefault();
+/**
+ * handler function to create dashboard from savedParks on webpage load
+ * 
+ * @param {object} savedParks park data object
+ * @return {undefined}
+ */
+const savedParksDashBoardHandler = function(savedParks) {
+    if (Object.keys(savedParks).length === 0) {
+        return;
+    }
 
-    clearParkModalEl();
+    // create elements for the saved parks
+    const savedParkEl = document.createElement('div');
+    savedParkEl.classList = 'park-dashboard';
+    savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>";
+    parkEl.appendChild(savedParkEl);
 
-    const parkCode = event.target.getAttribute("data-park-code");
-
-    const savedParkData = savedParks[parkCode];
-    generateParkModalContent(savedParkData);
-
-    const lat = savedParkData.latitude;
-    const lon = savedParkData.longitude;
-    getWeatherData(lat, lon)
-        .then(weatherData => generateWeatherCards(weatherData));
+    generateParkCards(savedParks);
 };
 
 searchButtonEl.addEventListener("click", searchButtonHandler);
-parkDashboard();
+window.addEventListener("load", savedParksDashBoardHandler(savedParks));
 
 // const getSun = function(lat, lon) {
 //     fetch("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400")
