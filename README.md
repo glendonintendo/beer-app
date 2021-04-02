@@ -97,3 +97,6 @@ The app was built mobile-first and therefor the phone and tablet versions looks 
 -   make search parameters bigger on phone
 -   modal at top of the page instead of being created on place where user clicked
 -   feature to send user to previously park page on clicking the header
+-   previous searches saved
+-   fix data to reuse function calls
+-   reorganize js function calls
