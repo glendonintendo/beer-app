@@ -5,8 +5,7 @@ const searchButtonEl = document.getElementById("park-search");
 const parkEl = document.getElementById("park-results");
 const parkModalEl = document.getElementById("park-modal");
 
-let savedParksArr = [];
-
+const savedParks = JSON.parse(localStorage.getItem("savedParks")) || {};
 
 // global variables for root urls and api keys of apis
 const npsRootUrl = "https://developer.nps.gov/api/v1/";
@@ -40,7 +39,6 @@ const searchButtonHandler = function(event) {
                 return;
             }
             clearParkEl();
-            generateParkCards(data);
             const parkStorage = {};
             data.forEach(park => {
                 const parkValue = {
@@ -62,61 +60,22 @@ const searchButtonHandler = function(event) {
                 parkStorage[park.parkCode] = parkValue;
             })
             localStorage.setItem("parkStorage", JSON.stringify(parkStorage));
+            generateParkCards(parkStorage);
         });
 };
 
-const saveParks = function(clickedParks) {
-    localStorage.setItem('clickedParks', JSON.stringify(clickedParks));
-}
-
 const parkDashboard = function() {
-    let savedParks = JSON.parse(localStorage.getItem("clickedParks"));
-    
-    if (!savedParks) {
+    if (Object.keys(savedParks).length === 0) {
         return;
     }
 
     // create elements for the saved parks
-    let savedParkEl = document.createElement('div');
+    const savedParkEl = document.createElement('div');
     savedParkEl.classList = 'park-dashboard';
-
     savedParkEl.innerHTML = "<h3 class='saved-parks'><strong>Previously Visited Parks<strong></h3>";
-
-    for (let i=0; i < savedParks.length; i++) {
-        let savedParkCard = document.createElement('div');
-        savedParkCard.classList = 'card row align-center clicked-parks';
-        savedParkCard.setAttribute("data-park-code", savedParks[i].parkInfo.parkCode);
-        savedParkCard.setAttribute("data-open", "park-modal");
-        savedParkCard.style.backgroundImage = "url(" + savedParks[i].parkInfo.images[0].url + ")";
-        let cardHeader = document.createElement('h4');
-        let savedParkName = savedParks[i].parkInfo.fullName;
-        cardHeader.textContent = savedParkName;
-        cardHeader.setAttribute("data-park-code", savedParks[i].parkInfo.parkCode);
-        savedParkCard.appendChild(cardHeader);
-
-        let savedParkLat = savedParks[i].parkInfo.latitude;
-        let savedParkLon = savedParks[i].parkInfo.longitude;
-        
-        getWeatherData(savedParkLat, savedParkLon)
-            .then(weatherData => {
-                let savedParkTemp = weatherData.current.temp;
-                let savedParkWeatherIcon = weatherData.current.weather[0].icon
-                
-                let savedTempEl = document.createElement('ul');
-                savedTempEl.classList = 'saved-park-elements';
-                savedTempEl.innerHTML = `
-                    <li class="saved-temp" data-park-code="${savedParks[i].parkInfo.parkCode}"> Today's Temperature: ${savedParkTemp} </li>
-                    <img src="https://openweathermap.org/img/wn/${savedParkWeatherIcon}@2x.png" data-park-code="${savedParks[i].parkInfo.parkCode}"/>
-                `
-                savedTempEl.setAttribute("data-park-code", savedParks[i].parkInfo.parkCode);
-                savedParkCard.appendChild(savedTempEl);
-            });
-
-        savedParkCard.addEventListener("click", previouslyVisitedHandler);
-        savedParkEl.appendChild(savedParkCard);
-    }
-
     parkEl.appendChild(savedParkEl);
+
+    generateParkCards(savedParks);
 }
 
 /**
@@ -165,23 +124,22 @@ const clearParkEl = function() {
  * 2. create park card for each park in parks array
  * 3. append park cards to parks div
  */
-const generateParkCards = function(data) {
-    // loop over the parks returned from search
-    data.forEach(park => {
-        // create a card for park info
+const generateParkCards = function(parks) {
+    // create a card for park info
+    for (park in parks) {
         const parkLink = document.createElement("div");
         parkLink.classList = "card row align-center park-card";
         parkLink.setAttribute("data-open", "park-modal");
-        parkLink.setAttribute("data-park-code", park.parkCode);
+        parkLink.setAttribute("data-park-code", parks[park].parkCode);
         
         // populate park card with park content
         parkLink.innerHTML = `
-            <div class="large-4 medium-4 columns img-holder" data-park-code="${park.parkCode}">
-                <img class="img" src="${park.images[0].url}" alt="${park.images[0].altText}" data-park-code="${park.parkCode}" />
+            <div class="large-4 medium-4 columns img-holder" data-park-code="${parks[park].parkCode}">
+                <img class="img" src="${parks[park].images[0].url}" alt="${parks[park].images[0].altText}" data-park-code="${parks[park].parkCode}" />
             </div>
-            <div class="large-8 medium-8 columns park-info-holder" data-park-code="${park.parkCode}">
-                <h4 class="park-header" data-park-code="${park.parkCode}">${park.fullName}</h4>
-                <p class="park-description" data-park-code="${park.parkCode}">${park.description}</p>
+            <div class="large-8 medium-8 columns park-info-holder" data-park-code="${parks[park].parkCode}">
+                <h4 class="park-header" data-park-code="${parks[park].parkCode}">${parks[park].fullName}</h4>
+                <p class="park-description" data-park-code="${parks[park].parkCode}">${parks[park].description}</p>
             </div>
         `;
         
@@ -190,7 +148,7 @@ const generateParkCards = function(data) {
 
         // append park card to park div
         parkEl.appendChild(parkLink);
-    });
+    }
 };
 
 /**
@@ -212,9 +170,9 @@ const nationalParkHandler = function(event) {
     const parkInfo = getParkInfo(parkCode);
     generateParkModalContent(parkInfo);
     
-    savedParksArr.push({parkInfo});
-    saveParks(savedParksArr);
-  
+    savedParks[parkCode] = parkInfo;
+    localStorage.setItem('savedParks', JSON.stringify(savedParks));
+      
     const lat = parkInfo.latitude;
     const lon = parkInfo.longitude;
     getWeatherData(lat, lon)
@@ -303,13 +261,12 @@ const previouslyVisitedHandler = function(event) {
     clearParkModalEl();
 
     const parkCode = event.target.getAttribute("data-park-code");
-    const savedParks = JSON.parse(localStorage.getItem("clickedParks"));
 
-    const clickedParkData = savedParks.filter(park => park.parkInfo.parkCode === parkCode)[0].parkInfo;
-    generateParkModalContent(clickedParkData);
+    const savedParkData = savedParks[parkCode];
+    generateParkModalContent(savedParkData);
 
-    const lat = clickedParkData.latitude;
-    const lon = clickedParkData.longitude;
+    const lat = savedParkData.latitude;
+    const lon = savedParkData.longitude;
     getWeatherData(lat, lon)
         .then(weatherData => generateWeatherCards(weatherData));
 };
