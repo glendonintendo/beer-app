@@ -124,7 +124,7 @@ const generateParkCards = function(parks) {
         // populate park card with park content
         parkLink.innerHTML = `
             <div class="large-4 medium-4 columns img-holder" data-park-code="${parks[park].parkCode}">
-                <img class="img" src="${parks[park].images[0].url}" alt="${parks[park].images[0].altText}" data-park-code="${parks[park].parkCode}" />
+                <img class="img" src="${(parks[park].images[0]) ? parks[park].images[0].url : "./assets/images/no-image-available.png"}" alt="${(parks[park].images[0]) ? parks[park].images[0].altText : ""}" data-park-code="${parks[park].parkCode}" />
             </div>
             <div class="large-8 medium-8 columns park-info-holder" data-park-code="${parks[park].parkCode}">
                 <h4 class="park-header" data-park-code="${parks[park].parkCode}">${parks[park].fullName}</h4>
@@ -189,7 +189,7 @@ const getParkInfo = function(parkCode) {
  */
 const generateParkModalContent = function(parkData) {
     parkModalEl.innerHTML = `
-        <img src="${parkData.images[0].url}" alt="${parkData.images[0].altText}" />
+        <img src="${(parkData.images[0]) ? parkData.images[0].url : "./assets/images/no-image-available.png"}" alt="${(parkData.images[0]) ? parkData.images[0].altText : ""}" />
         <h4 class="park-header">${parkData.fullName}</h4>
         <p class="park-description">${parkData.description}</p>
         <button class="close-button" data-close aria-label="Close modal" type="button">
