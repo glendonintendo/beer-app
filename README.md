@@ -4,11 +4,11 @@
 - [Acceptance Criteria](#acceptance-criteria)
 - [Technologies Used](#technologies-used)
 - [Demo and Usage](#demo-and-usage)
-- [EXTRA](#extra)
 
 ## Description
-National Park Finders.
-This is a terrific application website that can be used by anyone wanting to use the internet to gather weather information about certain times of the day, certain times of the week and even certain times of the month about information that is critical of the weather which plays a vital role in our every day lifestyle's. For example the prediction of snow, rain and even ice-storms, this sort of information would be deem very useful to anyone and even especially when planing events on certain days of the week or even different times of the year. The application is centered on recreational parks and weather predictions and gives information that might be useful to someone wanting to for example schedule an outdoor event. This information can easily be gathered from its sleek and easy to use web interface that allows a user the ability of easy to use drop down search buttons that gives the names of all US states and a list of all sorts of activities that anyone might be interested in. This website can also be used to gather weather information on search topics, such as past historical events and even future predictions and so on. By just clicking on any state or activity from a given list you the user are given the information in real time, so this application in fact would be very useful to anyone who relies on the weather.
+The national park service maintains over 450 different parks and monuments to visit, each offering a unique history, topography, and wildlife for adventurers to experience. But with so many to choose from, how will you know which one to pick? And once you pick, how will you find the information you need to plan your trip accordingly.
+
+Well look no further. The National Park Finder application is a one-stop-shop for all your national park trip planning needs. With up-to-date information about location and activities, along with a 5-day weather forecast, the National Park Finder app gives you all you need to plan your trip to your favorite national parks. With an user-friendly interface and relevant-live information, the National Park Finder will save you time planning your next adventure to give you more time experiencing it.
 
 ## User Story
 ```
@@ -76,27 +76,3 @@ The app was built mobile-first and therefor the phone and tablet versions looks 
 ![National park search on phone screen](./assets/images/responsive-phone-demo.png)  
 
 ![National park search on tablet screen](./assets/images/responsive-tablet-demo.png)
-
-
-## EXTRA
--   carousel for images in modal
--   include territories in search options
--   add topics search option
--   show sunrise/sunset times in park modal
--   show things-to-do and activities in park modal
--   add badge system when park is visited
--   add pagination so can return more than 100 items on search (can remove state error that way too)
--   revise search to be more modular (searching multiple states at once)
--   modal is more interactive (can click weather icon for forecast, can click map for direciton information, etc.)
--   favicon!
--   switch moment.js to day.js
--   on hover styling for park cards
--   bug/fix clicking park multiple times amkes park show up multiple times in previously searched
--   Accessibility?
--   background image isn't centered on smaller screens
--   make search parameters bigger on phone
--   modal at top of the page instead of being created on place where user clicked
--   feature to send user to previously park page on clicking the header
--   previous searches saved
--   fix data to reuse function calls
--   reorganize js function calls
