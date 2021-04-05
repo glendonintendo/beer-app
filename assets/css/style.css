@@ -67,6 +67,7 @@ main {
 }
 .park-description {
     font-size: 1.5rem;
+    padding-right: 15px;
 }
 .saved-parks {
     text-align: center;
