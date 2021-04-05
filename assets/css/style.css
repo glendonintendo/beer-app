@@ -1,7 +1,7 @@
 body {
     background: url("../images/redwoods.jpg");
     background-size: cover;
-    background-position: 80%;
+    background-position: center;
     background-attachment: fixed;
 }
 main {
@@ -24,7 +24,7 @@ main {
 .top-bar {
     background: url("../images/redwoods.jpg");
     background-size: cover;
-    background-position: 80%;
+    background-position: center;
     background-attachment: fixed;
 }
 .drop-down-options {
